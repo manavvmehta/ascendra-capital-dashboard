@@ -1,0 +1,122 @@
+================================================================
+   EVERY TRADING MORNING          keep this open until it sticks
+                                  rewritten 01/10/2026
+================================================================
+
+
+   BEFORE 9:15 - FOUR WINDOWS, IN THIS ORDER
+   -----------------------------------------
+
+   1.  Double-click        ASCENDRA.py          (in 5 LIVE FEED)
+
+   2.  Press  1            log in to Zerodha
+
+          - your browser opens the Zerodha login
+          - log in as normal
+          - it lands on a page that FAILS TO LOAD. That is
+            CORRECT. Nothing has gone wrong.
+          - copy the WHOLE address from the address bar
+          - paste it into the black window, press Enter
+          - it shows live prices. That is the feed working.
+
+       Do this FIRST. Everything below uses this one login.
+
+   3.  Press Enter, then press  2        starts the desk
+
+          - your dashboard opens at localhost:5055
+
+   4.  Double-click        FORMATIONS LIVE.bat     (Patterns)
+
+   5.  Double-click        SMC TWO BOOKS.bat       (SMC short + long)
+
+   6.  Double-click        COMMODITIES LIVE.bat    (Gold, Silver,
+                                                    Crude, Copper)
+
+   7.  LEAVE ALL FOUR BLACK WINDOWS OPEN.
+
+       Each window IS an engine. Close one and that tab stops
+       being watched - and a stop nobody is watching is not a
+       stop.
+
+
+   WHAT EACH WINDOW IS DOING
+   -------------------------
+
+   ASCENDRA.py          serves the dashboard on localhost:5055
+
+   FORMATIONS LIVE      the Patterns book - scans for formations
+                        rated 8 and above
+
+   SMC TWO BOOKS        the two SMC books, short term and long
+                        term, AND the live price for the whole
+                        desk - it quotes every stock once a
+                        minute, so if this window is closed every
+                        tab's PRICE NOW goes stale
+
+   COMMODITIES LIVE     Gold, Silver, Crude and Copper on the
+                        daily chart
+
+
+   THEN NOTHING
+   ------------
+
+   The dashboard re-reads itself every 30 seconds, so prices move
+   and new calls appear on their own. You do not need to refresh.
+
+   The bell at the bottom right flashes a new call and keeps a
+   list of the day's calls - left-click it to see them, and
+   clicking a line takes you to that engine.
+
+   Look at the dashboard whenever you like: localhost:5055
+
+       TODAY             what to place, what you hold, what closed
+       OPEN POSITIONS    everything you are carrying, all books
+       the engine tabs   Live, Waiting, Booked, in that order
+
+
+   AT THE END OF THE DAY
+   ---------------------
+
+   Close the windows. Everything is already saved.
+
+
+================================================================
+   IF SOMETHING IS WRONG
+================================================================
+
+   "Today's login is missing"
+        You started an engine before logging in. Do step 2 first,
+        then start that engine again.
+
+   Dashboard will not load
+        The ASCENDRA.py window is closed. Start it again.
+
+   A tab says the engine is not running
+        That engine's black window is closed. Start its .bat
+        again. The tab says which one.
+
+   PRICE NOW looks stale on every tab
+        SMC TWO BOOKS is closed or was never started. That is the
+        window that quotes prices for the whole desk.
+
+   No calls appearing
+        Normal for a quiet morning. The engines are selective and
+        only fire when a setup genuinely appears. Check the
+        WAITING group on each tab: that shows what they are
+        watching, so you can tell "nothing happening" from
+        "nothing firing".
+
+   Anything else
+        Screenshot the black window and send it to Claude.
+        Do not try to fix it - several of the warnings that
+        appear are completely normal, and only the full text
+        says which.
+
+
+================================================================
+   THE ONE THING TO REMEMBER
+
+   Set your PC never to sleep on trading days. If it sleeps
+   mid-session the engines go quiet without saying so, and you
+   lose the day's record.
+================================================================

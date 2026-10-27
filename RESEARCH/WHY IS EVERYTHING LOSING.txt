@@ -1,0 +1,186 @@
+================================================================================
+   "HOW ARE PEOPLE MAKING MONEY THEN?"
+   11/09/2026,  ASCENDRA CAPITAL
+================================================================================
+
+MM: "you are not backtesting properly i think. the inputs that you are taking
+might be wrong ... how is it possible each and every strategy is losing us
+money. this is practically not possible."
+
+The right suspicion to have. Before arguing, I checked myself three ways.
+
+
+================================================================================
+   CHECK 1 — CAN MY TESTING FIND AN EDGE THAT IS KNOWN TO EXIST?
+================================================================================
+
+If my harness is broken it will fail to find something the published research
+says IS there. So I ran MOMENTUM on the same data, same liquidity rule, same
+costs: rank every liquid stock by its last twelve months' return skipping the
+most recent month, buy the top tenth, hold a month, repeat. Nothing else.
+
+   portfolio                        months   up    per month
+   -------------------------------------------------------------
+   TOP 10% - the momentum buy          24   54%       +Rs 417
+   the whole liquid market             24   54%        +Rs 32
+   BOTTOM 10% - the laggards           24   38%       -Rs 917
+
+Winners beat the market, the market beats the laggards, and the gap is
++Rs 1,334 a month between the two ends. That is the textbook momentum result
+and it came out of the same code that says the chart patterns lose.
+
+So the machinery is not broken. It finds an edge when there is one.
+
+(Honest caveat: only 24 rebalances, and the first half is -220 while the
+second is +990. It is the right SHAPE, not yet a proven number.)
+
+
+================================================================================
+   CHECK 2 — ARE MY COSTS TOO HARSH?
+================================================================================
+
+Checked against Zerodha's actual published charges on a Rs 1,00,000 trade.
+
+   INTRADAY   brokerage Rs 20 x 2, STT 0.025% on the sell, exchange
+              0.00322% x 2, stamp 0.003%, SEBI, GST 18%
+              = about Rs 83  ->  0.083%.   I used 0.082%.  Correct.
+
+   DELIVERY   no brokerage, STT 0.1% on BOTH legs, exchange, stamp 0.015%,
+              DP charge about Rs 15.93 on the sell, GST
+              = about Rs 235  ->  0.235%.   I used 0.222%.
+
+So the intraday figure is right, and the delivery figure I used is slightly
+TOO KIND, not too harsh. Costs are not the reason the results are negative.
+
+
+================================================================================
+   CHECK 3 — ARE PEOPLE ACTUALLY MAKING MONEY DOING THIS?
+================================================================================
+
+This is the part worth sitting with, because it is not opinion. SEBI does not
+survey volunteers - it counts every account.
+
+   INTRADAY EQUITY, FY23 (SEBI, July 2024)
+     71% of individual intraday traders LOST money
+     80% lost among those trading more than 500 times a year
+     76% lost among traders under 30
+     loss-makers spent a further 57% of their losses on transaction costs
+     profit-makers spent 19% of their profits on costs
+
+   EQUITY F&O, FY22 to FY24 (SEBI, September 2024)
+     93% of individual traders lost money
+     aggregate losses over Rs 1.8 lakh crore in three years
+
+Read the first line again. Seven in ten lose, and it gets worse the more you
+trade. So the premise - that these strategies are widely making people money -
+is not what the data shows. About three in ten intraday traders make money,
+and only a fraction of those beat what they would have made just holding.
+
+
+================================================================================
+   SO WHY DOES IT LOOK LIKE EVERYONE IS WINNING?
+================================================================================
+
+Because you are only shown the winners, and that is not a figure of speech -
+it is the difference between the two kinds of evidence above.
+
+   SEBI counts everybody, including the ones who quit.
+   Twitter and YouTube count volunteers, and nobody volunteers a bad year.
+
+Out of a thousand people flipping coins, thirty will get ten heads in a row.
+Those thirty will have a method, a course and a screenshot folder. The other
+nine hundred and seventy stop posting. Both groups are real; only one is
+visible.
+
+This is also why hand-drawn backtests look so much better than mechanical
+ones. Published mechanical tests of SMC produce win rates around 41%. The
+screenshot backtests that circulate claim 70% and more. The difference is not
+the method - it is knowing how the chart ended before choosing where the
+pattern was.
+
+
+================================================================================
+   WHAT HAS ACTUALLY SURVIVED HONEST TESTING
+================================================================================
+
+Not nothing. But notice what the survivors have in common.
+
+   MOMENTUM / TREND      The most replicated finding in finance, confirmed on
+                         Indian equities in several published studies, and it
+                         showed up in your own data above.
+
+   WHAT IT IS NOT:       no chart pattern. No entry level. No stop. No
+                         timeframe combination. It is a RANKING, held for a
+                         month, rebalanced. You never look at a chart.
+
+   CHART TRADING RULES   When researchers account for the fact that thousands
+                         of rules get tried before one looks good, the
+                         apparent profits mostly vanish - and the rules that
+                         did work on pre-1990 data stopped working after
+                         they were published.
+
+That is the shape of the whole answer. The things that survive work on a slow
+clock and need no chart reading. The things we have been testing work on a
+fast clock and live or die inside a cost of 0.08% a trade while trying to
+capture moves of 0.1% to 0.2%.
+
+
+================================================================================
+   WHERE I THINK WE ARE ACTUALLY GOING WRONG
+================================================================================
+
+Not the backtesting. The clock.
+
+Every single thing tested in this project - the four setups, BREAKOUT-20D,
+SMC, Fibonacci, the chart patterns, the candlesticks - asks the same question:
+where does price go in the next few hours or days? At that horizon the move
+you are trying to catch is only a few times bigger than what it costs to catch
+it, so the method has to be right very often to survive. Nothing tested is.
+
+Momentum asks a different question: which stocks have been strong for a year?
+The answer moves slowly, the trade is held for a month, and the cost is a
+rounding error against the move. That is why it survives testing and the chart
+rules do not.
+
+   HEIKEN ASHI, and the indicator question: Heiken Ashi is not new
+   information. It is the same open, high, low and close, averaged. Averaging
+   removes noise and adds LAG - it makes a trend easier to SEE after it has
+   started. That can help a person stay in a trade; it cannot tell you
+   anything the raw candles did not already contain. Twenty indicators were
+   tested on your data on 10/09, leading and lagging, and every one subtracted
+   from the base. I can test Heiken Ashi specifically if you want it, but I
+   would not expect it to change the answer, and I would rather say that now
+   than after spending a day on it.
+
+
+================================================================================
+   THE ONE THING THAT WOULD SETTLE THIS FASTER THAN ANY BACKTEST
+================================================================================
+
+Jenil's actual trade log. Twenty or thirty real trades - entry, exit, date,
+instrument, size. If his results are real, that log will show WHERE they come
+from: whether it is the setup, the sizing, the instrument, or the period. It
+has been the open question since 07/09 and no amount of further testing
+replaces it.
+
+================================================================================
+
+
+====================================================================================
+  DOES MY TESTING FIND AN EDGE THAT IS KNOWN TO EXIST?
+  12-month momentum, skip the last month, hold one month, NSE, 3 years
+====================================================================================
+  24 monthly rebalances, about 827 liquid stocks each time
+  Money per Rs 1,00,000 held for one month, after 0.222% costs.
+
+  portfolio                           months     up   per month      best     worst
+  --------------------------------------------------------------------------------
+  TOP 10% - the momentum buy              24    54%        +417   +14,950   -11,627
+  the whole liquid market                 24    54%         +32   +12,631   -11,289
+  BOTTOM 10% - the laggards               24    38%        -917   +16,481   -15,170
+
+  momentum minus the market:  +385 a month, positive in 67% of months
+  first half -220   second half +990
+
+  Note on what this is NOT: it is a portfolio held for a month, not a
+  trade with an entry, a stop and a target. There is no chart in it.

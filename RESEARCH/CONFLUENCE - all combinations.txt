@@ -1,0 +1,166 @@
+================================================================================
+   LEVEL + CANDLE + INDICATOR  —  DOES CLUBBING THEM HELP?
+   15/09/2026,  ASCENDRA CAPITAL
+================================================================================
+
+MM: "when the price reaches a certain level that is when indicators,
+candlesticks and price action should all be clubbed ... if there is a reversal
+candle at the top or bottom of the chart and indicator also shows an overbought
+zone or oversold zone, thats when you place a trade. we have been backtesting
+it in a wrong way till date."
+
+He was right that nothing here had tested that. Every earlier test took ONE
+thing and traded it alone.
+
+THE THREE LEGS, built from the published rules
+
+  1. LOCATION, four kinds, each tested separately
+       ZONE   a band price has already been rejected from at least TWICE,
+              drawn from the extreme wick to the cluster of bodies
+       RANGE  the top or bottom 15% of the last 40 bars
+       EMA    the 20, 50 or 200 EMA, within a quarter of an ATR
+       BB     outside the 20,2 Bollinger band
+
+  2. INDICATOR   stretched AND turning back. The trigger is the CROSS BACK -
+                 RSI closing back above 30, not merely sitting under it. This
+                 is the part most descriptions get wrong.
+
+  3. CANDLE      hammer / shooting star, engulfing, or a doji at the extreme.
+
+  STOP    beyond the far edge of the level, never tighter than the ATR band
+          for that timeframe (1.25x on 15-min, 1.5x hourly, 2x daily), and
+          never in open space - it must sit beyond a real swing point.
+  TARGET  twice the risk.
+  ENTRY   the next bar's open after the signal bar closes.
+
+THE INDICATOR MATHS WAS CHECKED, not assumed: our RSI reproduces Wilder's own
+published example to two decimal places.
+
+AND THE POINT: every leg is also tested ALONE and in every PAIR, on the same
+bars, so the question is answered directly - is the edge in the AGREEMENT?
+
+
+================================================================================
+   THE ANSWER: ON THE HOURLY CHART, YES
+================================================================================
+
+Every leg on its own loses. Every pair is mixed. All three together is
+POSITIVE on every kind of level:
+
+      ALL THREE, Bollinger        +Rs 135 a trade    2,693 trades
+      ALL THREE, range extreme     +Rs 52            2,763
+      ALL THREE, EMA               +Rs 23               89
+      ALL THREE, zone              +Rs 19            4,152
+
+The Bollinger one is positive in BOTH halves of the year (+162 then +110) -
+the first thing in this whole project to do that.
+
+On 15-MINUTE the same ORDERING holds - all three (-Rs 26) beats the pairs
+(-Rs 50) beats candle alone (-Rs 71) - but nothing crosses zero. At that speed
+the cost eats it.
+
+On DAILY everything loses badly. Delivery costs 0.235% a round trip and a 2x
+ATR stop on a daily bar is a wide stop; the two together are too much.
+
+NOT YET PROVEN. 19 rows on each of three timeframes is 57 cells, and with that
+many something can look good by luck. The control test - the same stock, same
+day, same holding time, random entry - has not been run on these yet. Until it
+has, this is a promising signal and not a result.
+
+================================================================================
+
+
+================================================================================================
+  HOURLY — does clubbing them help?   (398 stocks)
+================================================================================================
+  what had to line up     level      trades    win  per trade   1st half   2nd half
+  --------------------------------------------------------------------------------------------
+  level only              ZONE       855354  36.6%        -28        -22        -34
+  level only              RANGE      196419  35.0%        -83        -31       -133
+  level only              EMA        239718  35.9%        -66        -98        -35
+  level only              BB         182742  36.1%        -17        +50        -82
+
+  candle only             -          213040  35.9%        -67        -58        -76
+
+  indicator only          -           20330  37.5%         -4       +114       -122
+
+  level + candle          ZONE       157225  36.7%        -25         -6        -44
+  level + candle          RANGE       27822  34.8%        -88        -44       -131
+  level + candle          EMA         44264  36.2%        -43        -41        -46
+  level + candle          BB          32128  36.9%         +7        +80        -66
+
+  level + indicator       ZONE        14422  38.4%        +16        +10        +23
+  level + indicator       RANGE        9677  37.0%        +36        +99        -24
+  level + indicator       EMA           383  34.7%       -143       -259        -33
+  level + indicator       BB           8614  38.2%        +42       +120        -34
+
+  candle + indicator      -            5822  37.6%         +6       +156       -142
+
+  ALL THREE               ZONE         4152  38.3%        +19       +116        -76
+  ALL THREE               RANGE        2763  37.0%        +52       +131        -27
+  ALL THREE               EMA            89  41.6%        +23        +21        +26
+  ALL THREE               BB           2693  39.5%       +135       +162       +110
+
+
+================================================================================================
+  15MIN — does clubbing them help?   (150 stocks)
+================================================================================================
+  what had to line up     level      trades    win  per trade   1st half   2nd half
+  --------------------------------------------------------------------------------------------
+  level only              ZONE      1533645  38.4%        -52        -47        -57
+  level only              RANGE      285358  34.1%        -86        -82        -90
+  level only              EMA        339074  35.2%        -69        -62        -75
+  level only              BB         262787  34.2%        -96       -101        -90
+
+  candle only             -          308672  34.9%        -71        -68        -74
+
+  indicator only          -           28830  35.9%        -64        -54        -74
+
+  level + candle          ZONE       283893  38.8%        -50        -50        -51
+  level + candle          RANGE       41124  34.3%        -73        -71        -76
+  level + candle          EMA         63738  35.3%        -68        -65        -71
+  level + candle          BB          46626  35.4%        -76        -83        -70
+
+  level + indicator       ZONE        26188  40.1%        -36        -20        -52
+  level + indicator       RANGE       13930  34.5%        -69        -60        -78
+  level + indicator       EMA           550  40.9%         +6        -36        +48
+  level + indicator       BB          13460  36.3%        -70        -65        -75
+
+  candle + indicator      -            8859  36.0%        -62        -60        -64
+
+  ALL THREE               ZONE         8085  40.9%        -26        -17        -34
+  ALL THREE               RANGE        4196  33.9%        -78       -109        -48
+  ALL THREE               EMA           163  39.3%        -28         -1        -56
+  ALL THREE               BB           4102  37.1%        -63        -55        -71
+
+
+================================================================================================
+  DAILY — does clubbing them help?   (1873 stocks)
+================================================================================================
+  what had to line up     level      trades    win  per trade   1st half   2nd half
+  --------------------------------------------------------------------------------------------
+  level only              ZONE       438093  39.8%        -89       -122        -57
+  level only              RANGE      144327  36.2%       -537       -645       -429
+  level only              EMA        203920  38.3%       -338       -437       -240
+  level only              BB         141338  38.4%       -167       -203       -132
+
+  candle only             -          126335  38.4%       -359       -352       -366
+
+  indicator only          -           12639  37.4%       -617       -939       -297
+
+  level + candle          ZONE        66892  40.1%       -119        -81       -158
+  level + candle          RANGE       16680  36.8%       -585       -652       -518
+  level + candle          EMA         29817  39.1%       -278       -291       -265
+  level + candle          BB          22509  38.6%       -237       -279       -196
+
+  level + indicator       ZONE         5539  38.4%       -635     -1,108       -170
+  level + indicator       RANGE        6359  37.0%       -531       -944       -121
+  level + indicator       EMA           204  40.7%       -530     -1,677       +617
+  level + indicator       BB           6085  38.6%       -466       -659       -273
+
+  candle + indicator      -            2936  37.5%       -605       -884       -326
+
+  ALL THREE               ZONE         1298  39.4%       -361       -831       +105
+  ALL THREE               RANGE        1507  38.6%       -185       -561       +190
+  ALL THREE               EMA            45  35.6%     -2,309     -2,851     -1,791
+  ALL THREE               BB           1576  37.8%       -565       -743       -388

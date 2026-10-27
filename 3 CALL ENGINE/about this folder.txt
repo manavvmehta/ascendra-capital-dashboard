@@ -1,0 +1,77 @@
+================================================================
+  3  CALL ENGINE
+================================================================
+
+THIS IS THE ENGINE ITSELF.
+
+Jenil wrote it. It is the thing that produces the buy and sell
+calls on his screen, and it is what will produce yours.
+
+You do not need to open any of it.
+
+
+WHY IT IS HERE RATHER THAN LEFT IN THE ZIP
+------------------------------------------
+Because it is the most valuable thing you have been given, and a
+zip file nobody unpacks is a thing nobody knows they own.
+
+Building a scanner like this from nothing would take weeks. You
+already have it, finished and tested. What is missing is not the
+brain - it is the plumbing that feeds it live prices.
+
+
+THE FILES
+---------
+
+tech_calls.py
+    The whole engine. Around 2,000 lines. It holds:
+      - the filter that throws out stocks too cheap or too thinly
+        traded to be worth a call
+      - the shortlist that picks the 25 most active names each cycle
+      - the five setups that look for a reason to buy or sell
+      - the scoring that decides which of those become real calls
+      - the lifecycle: waiting, live, target hit, stopped, expired
+
+HOW_IT_WORKS.txt
+    THE ONE TO READ IF YOU READ ANY. Plain language, no code. Every
+    threshold, every rule, and - unusually honest - a section on what
+    he deliberately left OUT and why.
+
+README.md
+    Shorter summary, plus his own account of the biggest unsolved
+    problem in it.
+
+OPEN_QUESTIONS.txt
+    Eight things in the engine that are judgement calls rather than
+    proven facts. Worth reading before trusting any of it too far.
+
+config.py, state.py
+    Small supporting files. Where things get saved, and how the
+    parts talk to each other.
+
+
+THE TWO TIMEFRAMES
+------------------
+Four of the five setups read 15-MINUTE candles and close the same
+day at 15:10. They need a live price feed and cannot run without
+one.
+
+The fifth, BREAKOUT-20D, reads DAILY candles and holds for three to
+ten sessions. It needs nothing but the free end-of-day data you are
+already downloading.
+
+That is why the daily one runs first. Not a compromise - it is the
+only one the free data can physically support.
+
+
+THE HONEST PART
+---------------
+His own dashboard reports live results running BELOW what his
+testing predicted. He shows that on his own screen rather than
+hiding it, which says something good about him and something
+cautionary about the engine.
+
+Treat it as a strong starting point that still has to prove itself
+on your data. Not as a finished answer.
+
+================================================================

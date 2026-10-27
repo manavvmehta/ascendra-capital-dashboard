@@ -1,0 +1,325 @@
+================================================================
+   ASCENDRA CAPITAL — EVERY RULE, IN ONE PLACE
+   Last updated: Friday 4 September 2026
+================================================================
+
+   This file is the record of every setting and rule in use.
+   Nothing is decided anywhere else. If a number on the dashboard
+   does not match this file, one of them is wrong — tell Claude.
+
+
+================================================================
+   1.  THE EQUITY BOOK          (live, recording since 3 Sep 2026)
+================================================================
+
+   Total capital            Rs 50,00,000
+   Money per stock          Rs 1,00,000
+   Positions at a time      50   (50,00,000 / 1,00,000)
+   One position per stock   yes — a second signal on a stock you
+                            already hold is recorded, not taken
+   When the book is full    the signal is RECORDED on the
+                            "Trades not taken" tab, never traded
+
+   Universe                 every NSE equity, about 2,325 names.
+                            F&O stocks are included, as cash shares.
+   Market-cap floor         built but switched OFF. Rs 500 crore,
+                            waiting on a data source. Parked.
+
+   Virtual money only. Nothing is ever executed.
+
+
+================================================================
+   2.  INTRADAY RULES              (equity, running now)
+================================================================
+
+   Chart                    15-minute candles
+   Trend filter             the daily chart must agree
+
+   Setups                   PULLBACK      pullback to EMA20 or VWAP,
+                                          RSI reset, reversal candle
+                            ORB           opening-range breakout
+                            SQUEEZE       volatility compression, then break
+                            VWAP-FLIP     price flips sides of VWAP
+
+   Fires at                 confluence score 6.5 or more
+   "High conviction" at     8.0 or more
+   Maximum score            9.0
+
+   Stop                     set by the setup — about 0.9% of price
+                            in practice
+   First target  (T1)       1x the risk. HALF the position comes off
+                            and the stop moves to breakeven.
+   Second target (T2)       2x the risk. The rest comes off.
+   Force close              15:10, every day, no exceptions
+   Unfilled orders          expire 90 minutes after they are named
+
+   Coverage each cycle      60 most active + 200 rotating, every
+                            150 seconds — the whole market is seen
+                            about every 25 minutes
+
+
+================================================================
+   3.  SWING RULES                 (equity, running now)
+================================================================
+
+   Chart                    daily candles
+   Setup                    BREAKOUT-20D — a 20-day breakout
+   Swept                    the whole market, every 10 minutes,
+                            from cached data (costs nothing)
+   Closing scan             15:45 each day
+   Held                     overnight, for 3 to 10 sessions
+   Capital                  a swing position keeps its Rs 1,00,000
+                            slot until it closes. Three held
+                            overnight means tomorrow opens with
+                            Rs 47,00,000 free, not Rs 50,00,000.
+
+
+================================================================
+   4.  FUTURES RULES               (NOT BUILT YET)
+================================================================
+
+   Decided:
+       Intraday only            squared off the same day
+       Separate fund            kept completely apart from the
+                                Rs 50,00,000 equity book
+       One lot of each stock    not a rupee amount — a lot
+       Target and stop          different from the equity rules
+
+   Still to decide — Claude needs these before building:
+       How large is the futures fund?   ANSWERED: Rs 1,00,00,000
+       What target and what stop?
+
+   Known issue to keep in mind: one lot is not one size. A lot of
+   a cheap stock is about Rs 5 lakh of exposure, an expensive one
+   Rs 15-20 lakh. So "one lot each" means some bets are three or
+   four times bigger than others, and the P&L will be weighted
+   towards whichever expensive stocks happen to signal.
+
+
+================================================================
+   5.  THE F&O STUDY               (not run yet)
+================================================================
+
+   All of this lives in the  NSE FO BACKTEST  folder.
+
+   FIRM RULE, set by MM on 4 Sep:
+       Jenil's five setups are NOT to be changed, re-tuned or
+       re-tested as part of this study. tech_calls.py has never
+       been edited and stays that way. If his setup is ever to be
+       backtested, that is a SEPARATE job, run separately, only
+       when MM asks for it.
+
+   Question                 does one trend + one momentum + one
+                            volume indicator, taken at a support or
+                            resistance level, make money intraday?
+
+   Entries                  BOUNCE off the level, not a break
+                            through it
+   Levels, fixed in advance previous day's high and low
+                            floor pivots — P, R1, R2, S1, S2
+                            opening range high and low
+   Stop                     1.5 x ATR(14), clamped to 1%-2% of
+                            the entry price
+   Target                   2 x the stop, so winners land at 2%-4%
+   Exit                     15:10
+
+   Candidates, 4 per family
+       trend      EMA20/50 · ADX-DI · Supertrend · MACD
+       momentum   RSI · Stochastic · ROC · CCI
+       volume     volume vs average · OBV slope · VWAP side · MFI
+
+   64 combinations in total.
+
+   How we avoid fooling ourselves:
+       the best combination is chosen on the FIRST HALF of the
+       data only, then run on the second half it has never seen;
+       a permutation test compares it with random signals; all 64
+       are reported, not just the winner. If the winner does not
+       beat random out of sample, the answer is "nothing found"
+       and we stop rather than adjusting until it looks good.
+
+
+================================================================
+   6.  COSTS                       (NOT on the dashboard)
+================================================================
+
+   MM calculates costs himself. Every figure on the dashboard is
+   GROSS — before brokerage, STT, GST and stamp duty.
+
+   The rate card, if you want to check your own arithmetic:
+
+       EQUITY INTRADAY, round trip on Rs 1,00,000
+           brokerage      Rs 40.00   Rs 20 or 0.03%, lower of the
+                                     two, each side
+           STT            Rs 25.00   0.025%, SELL side only
+           exchange        Rs 6.44   0.00322%, both sides
+           SEBI            Rs 0.20   Rs 10 per crore
+           stamp duty      Rs 3.00   0.003%, BUY side only
+           GST             Rs 8.40   18% on brokerage + exchange
+                                     + SEBI
+           ------------------------
+           TOTAL          Rs 83.04 = 0.083% of the trade
+
+       STOCK FUTURES INTRADAY, same round trip
+           TOTAL          Rs 67.37 = 0.0674%
+           (cheaper — STT is half the rate and exchange charges
+            are lower)
+
+   Brokerage is effectively FIXED at about Rs 20 a side, not a
+   percentage, so a bigger position costs less per rupee.
+
+   Measured on the first two live days: costs would have taken
+   HALF the gross profit — Rs 29,316 gross, Rs 14,619 net.
+
+   Not included anywhere: SLIPPAGE, the gap between the price you
+   wanted and the price you got. On thin stocks that can be larger
+   than every charge above put together.
+
+================================================================
+   7.  DECISIONS TAKEN, AND WHY
+================================================================
+
+   Score gate stays as it is      MM suggested dropping calls below
+                                  7. Testing showed score 7 is the
+                                  WORST bucket over three years
+                                  (-0.166R, the only one whose loss
+                                  is statistically real) and 6.5s win
+                                  MORE often than 7s, 34.0% vs 28.4%.
+                                  Cutting "below 7" makes it worse.
+                                  Revisit after weeks of live data.
+
+   No sector or position cap yet  Not added without evidence.
+
+   One money model everywhere     The page used to run two that
+                                  disagreed six-fold. Now: Rs 50 lakh,
+                                  Rs 1 lakh a stock, 50 slots, and
+                                  every tile obeys it.
+
+   Booked and open kept apart     Realised money and paper money are
+                                  never added into one figure.
+
+
+================================================================
+   8.  WHAT THE EVIDENCE SAYS SO FAR
+================================================================
+
+   Three-year backtest, BREAKOUT-20D, 4,285 trades:
+       32.8% win · -0.047R average · interval -0.090 to -0.004
+       A statistically real LOSS. 2024 and 2025 both lost.
+
+   Jenil's live +0.303R: tested, and in his own live window the
+   same rules also come out positive. His edge is a shorter and
+   better PERIOD, not a different method. He has never traded
+   2024 or 2025 with it.
+
+   Untested: the four intraday setups.
+
+   SEBI, FY26: 87.7% of individual F&O traders lost money.
+   99% of the professional profits came from algorithmic desks.
+
+
+================================================================
+   9.  OPEN QUESTIONS
+================================================================
+
+   How large is the futures fund?   ANSWERED: Rs 1,00,00,000
+   What target and stop for futures?
+   Does the flow bonus improve outcomes?          needs weeks of data
+   Does the confluence score predict anything?    needs weeks of data
+   Do "near miss" calls do worse than published?  needs weeks of data
+   Do the trades TURNED AWAY do better or worse
+   than the ones taken? (decides whether
+   first-come-first-served is costing money)      needs weeks of data
+
+
+================================================================
+   10.  THE SMC TAB  -  liquidity sweeps
+================================================================
+
+   WHAT IT IS
+       A separate book, on purpose. NO MONEY is assigned to it.
+       It takes no slot out of the Rs 50 lakh, changes no P&L
+       tile, and never touches the equity book. It exists so you
+       can RECORD these trades and let your own live data judge
+       them.
+
+   THE RULE, fixed in advance
+       A swing point is a bar whose low is the lowest of the
+       three bars either side. It is only KNOWN three bars later,
+       and it is never used before that.
+
+       A sweep is a bar that trades THROUGH that level - where
+       the stops are sitting - and CLOSES BACK on the other side.
+       The break happened and was rejected inside one bar.
+
+       The sweep bar must also be a reversal candle, from your
+       own documents: hammer, bullish engulfing or piercing for a
+       long; shooting star, bearish engulfing or dark cloud cover
+       for a short.
+
+       Buy      a break of the sweep bar's high  (sell: its low)
+       Stop     the other end of the sweep bar
+       Target   twice the risk
+       Out      15:10 same day on INTRADAY; on POSITIONAL it runs.
+
+   TWO SUB-TABS
+       INTRADAY     15-minute candles, 350 stocks scanned a few
+                    minutes after every 15-minute candle closes.
+                    Every stock that HAS A FUTURES CONTRACT goes
+                    in first; the rest of the list is the most
+                    liquid cash-only names.
+       POSITIONAL   daily candles, the WHOLE market, found once a
+                    day after the close. Free - it reads the
+                    cache the desk already keeps.
+
+   EQUITY AND FUTURES, ONE CALL
+       Every sweep is flashed ONCE, for the stock. Where the
+       stock also has a futures contract the call carries the lot
+       size, the expiry, and what one lot costs at that price.
+       A stock future tracks its own share price, so the sweep is
+       the SAME sweep on both charts - scanning NFO separately
+       would only produce a duplicate of every call.
+       Three buttons filter the list: EVERYTHING / CAN TRADE IN
+       FUTURES / EQUITY ONLY.
+
+   THE CHART
+       Click any row and the chart opens underneath it: the forty
+       candles leading up to the sweep, with the level that was
+       swept (dashed amber), the buy price (blue), the stop
+       (red), the target (green), and the sweep bar itself marked.
+       Drawn from the SAME exchange candles the sweep was found
+       in - the bars Zerodha sends the desk - so the picture and
+       the row can never disagree. A link to the full TradingView
+       chart sits under every one.
+
+   WHAT THE HISTORY SAYS  -  read this before trusting it
+       INTRADAY, 718,512 sweeps tested over a year of 300 stocks:
+           every sweep                    -0.024% before costs
+           + reversal candle              -0.012%
+           + previous day's extreme swept +0.006%   <- best
+           This is the ONLY structure tested all week that PASSED
+           a permutation test. The effect is real. It is also
+           about a twelfth of the size needed to cover brokerage,
+           so after costs it still loses ~0.077% a trade.
+
+       POSITIONAL, 123,541 daily sweeps over three years:
+           loses at every target from 0.75R to 2R, on both halves
+           of the data, BEFORE costs. The reason is structural: a
+           daily sweep bar is big, so the stop sits about 4.25%
+           away and the entry is at that bar's high. Wide risk,
+           poor price.
+
+       Both are shown anyway. One year is not a verdict, and
+       recording costs nothing.
+
+   FILES
+       DATA\smc_log.csv        every SMC call
+       DATA\smc_bars.json      the candles behind each chart
+       DATA\fo_universe.json   which stocks have futures, and the
+                               lot size - refreshed once a day
+
+
+================================================================
+   Ask Claude for "the rules" any time and he will read this back
+   and tell you what has changed.
+================================================================

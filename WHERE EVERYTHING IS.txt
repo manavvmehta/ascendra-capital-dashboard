@@ -1,0 +1,66 @@
+================================================================
+   ASCENDRA CAPITAL — what is in each folder
+================================================================
+
+
+   YOU ONLY EVER OPEN ONE FILE
+   ---------------------------
+
+       5 LIVE FEED \ ASCENDRA.py
+
+   Everything is behind that one menu:
+
+       1   Log in to Zerodha        every morning, first
+       2   Start the desk           the engine + your dashboard
+       3   Scan now                 after the close
+       4   Backtest                 three years, one-off
+       5   Get intraday data        for the F&O study — one-off,
+                                    ~5 minutes, after the close
+
+   Nothing else in any folder needs to be opened by hand.
+
+
+   THE FOLDERS
+   -----------
+
+   5 LIVE FEED     The programs. ASCENDRA.py and everything it runs.
+                   This is the only folder with anything you open.
+
+   WEBSITE         Your dashboard page. Opens by itself at
+                   localhost:5055 when the desk is running.
+
+   DATA            THE TRADING RECORD. Every call ever made lives in
+                   calls_log.csv here, permanently. The engine's own
+                   working files sit alongside it, all starting with a
+                   dot. Do not delete anything in here — this folder is
+                   your history and it cannot be rebuilt.
+
+   NSE FO BACKTEST  THE F&O STUDY. Downloaded price history, indicator
+                   tests, the futures strategy — everything to do with
+                   the F&O work lives here and nowhere else. Nothing in
+                   here affects live trading, and anything in here can be
+                   deleted and downloaded again.
+                   Jenil's five setups are NOT touched by any of it.
+
+   3 CALL ENGINE   The rules that find the trades. Do not edit by hand.
+
+   4 REFERENCE     Original documents, kept for reference only.
+
+   1 DOWNLOAD DATA  Old work, no longer used. Kept, not running.
+   2 ENGINE         The head-and-shoulders scanner, parked.
+
+
+   THE TWO THAT MATTER
+   -------------------
+
+       DATA             is your record.     Never delete.
+       NSE FO BACKTEST  is your workbench.  Safe to delete.
+
+
+================================================================
+   THE MORNING ROUTINE
+
+   Open ASCENDRA.py, press 1, press 2, leave the black window open.
+   That is all. See "MORNING - what to do.txt" if anything looks
+   wrong.
+================================================================

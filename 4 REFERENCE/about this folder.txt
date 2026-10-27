@@ -1,0 +1,56 @@
+================================================================
+  4  REFERENCE
+================================================================
+
+Background material. Nothing here runs - it is the written record
+of what the rules are and what we are trying to find out.
+
+
+WHAT BELONGS IN HERE
+--------------------
+
+The original rules document
+    The handoff describing the pattern, the detector, the trade
+    rules, the stock universe, and the open questions. This is the
+    source of truth for what the scanner is supposed to do.
+
+Anything else worth keeping
+    Notes, screenshots of charts you want looked at, descriptions
+    of other dashboard tabs, rules for other patterns.
+
+    If you want Claude to know about something, put it here and
+    say so. Nothing in this folder is read automatically.
+
+
+THE OPEN QUESTIONS, IN SHORT
+----------------------------
+
+Every one of these is currently a guess in the live code. Something
+had to be chosen, so something was. These are what the backtest is
+for:
+
+    Which shoulder sets the first target
+    Whether the neckline must be horizontal
+    How unequal the two shoulders may be
+    Whether the two sides must be similar in TIME, not just price
+    Whether the head must be the lowest point in the window
+    How fresh a breakout must be to still be worth taking
+    What kills a pattern that is still forming
+    Whether to wait for a pullback to the neckline before entering
+    Where the stop goes - the biggest lever of all
+    Whether volume should be a requirement again
+    How big a swing counts as a shoulder at all
+    Anything being missed entirely - trend, sector, the wider market
+
+
+AND ONE MORE, FOUND SINCE
+-------------------------
+
+    Whether the scanner should report the pattern that BROKE OUT
+    rather than the best-looking one it can find.
+
+    See "READ ME FIRST" for what this means in practice. It was
+    not on the original list and it may matter more than several
+    that were.
+
+================================================================

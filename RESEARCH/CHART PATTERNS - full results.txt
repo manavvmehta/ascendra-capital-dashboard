@@ -1,0 +1,291 @@
+================================================================================
+   CHART PATTERNS ON NSE  —  DO THEY WORK?
+   Tested 11/09/2026 for ASCENDRA CAPITAL
+================================================================================
+
+WHAT WAS TESTED
+
+  16 classical chart patterns, detected mechanically:
+
+    reversal       head and shoulders, inverted head and shoulders,
+                   double top, double bottom, triple top, triple bottom,
+                   cup with handle
+    continuation   ascending / descending / symmetrical triangles,
+                   bull flag, bear flag, pennant,
+                   rising wedge, falling wedge, rectangle
+
+  Daily      3 years, 2,330 stocks, 11,133 trades
+  15-minute  1 year, 398 stocks, 58,112 trades
+
+
+WHERE THE RULES CAME FROM
+
+  head and shoulders      Bulkowski, thepatternsite.com
+  everything else         StockCharts ChartSchool
+
+  Numbers were used as published - double top peaks "within 3%", the trough
+  "at least 10%" deep, the handle retracing "up to 1/3 of the cup", the
+  symmetrical triangle breaking between half and three quarters of the way to
+  the apex. Nothing was tuned afterwards to make a result look better.
+
+
+HOW THE TRADES WERE TAKEN
+
+  ENTRY    the NEXT bar's open after a bar CLOSED beyond the trigger level.
+           No intrabar fills.
+  STOP     where the pattern puts it - right shoulder, second peak, far side
+           of the triangle, the handle's low.
+  TARGET   the textbook measured move.
+  INSIDE   a bar that touches both the stop and the target is scored as the
+           STOP, always.
+  COSTS    daily 0.222% (equity delivery, STT on both legs); shorts held
+           overnight only in the 216 stocks that have futures, at 0.07%.
+           15-minute 0.082%, squared off at 15:10.
+  LIQUID   median turnover of the previous 20 sessions at least Rs 5 crore.
+
+  THE CONTROL - and this is what decides everything. Every pattern trade is
+  matched against a coin toss: the same side, held the same length of time,
+  in the same stock on a random day AND in a different stock on the same day.
+  A pattern has to beat BOTH. If it does not, the shape on the chart added
+  nothing and you were simply long a rising market.
+
+  LOOK-AHEAD AUDIT: 1,100 patterns were re-detected with the chart cut off at
+  the bar that completed them. All 1,100 were still found with no future bars
+  visible. Nothing in this test used hindsight.
+
+
+================================================================================
+   THE ANSWER
+================================================================================
+
+  Not one of the sixteen patterns makes money on NSE, on either timeframe,
+  after costs, against its own control.
+
+  On daily bars every single pattern loses. The whole book is -Rs 440 a trade
+  while a random entry in the same stocks made +Rs 201. Buying on a coin toss
+  beat every pattern except the short ones, and the short ones lost too.
+
+  On 15-minute bars everything sits on zero: -Rs 41 a trade against -Rs 49 for
+  the coin toss. The two that look positive (double bottom +Rs 123, triple
+  bottom +Rs 62) do not survive the significance bar, which with 32 tests is
+  p < 0.0016, and both were flat in the first half of the year.
+
+  It is NOT the stop being too tight. Widening the stop to 3x helps some
+  patterns - bull flag goes from -Rs 261 to +Rs 1,107 - but the coin toss over
+  the same period made +Rs 3,691. Wider stops close the gap to random; they
+  never cross it.
+
+  And it is NOT the exit rules either. With NO stop and NO target at all, just
+  holding for 40 days, the pattern entries STILL lose to a random entry in the
+  same stock in 13 of 16 cases. The entry itself carries no information.
+
+
+================================================================================
+
+
+================================================================================
+   DAILY — 3 YEARS, 2,330 STOCKS
+================================================================================
+====================================================================================================
+  CLASSICAL CHART PATTERNS ON NSE — 3 years, 2,330 stocks, daily bars
+====================================================================================================
+  Money shown per trade at Rs 1,00,000 a trade, after costs.
+  'control' is the same stock and holding time entered on a random day.
+
+  pattern               trades    win      net  control    edge  1st half  2nd half       p  verdict
+  ------------------------------------------------------------------------------------------------
+  RECTANGLE               3029  52.8%     -475      +84    -559      -168      -781  0.9985  LOSES
+  FALLING-WEDGE           2308  27.5%      +80     +440    -360      -409      +546  0.8658  LOSES
+  BULL-FLAG               1462  39.1%     -252     +803  -1,055       -89      -415  0.9985  LOSES
+  INV-HEAD-SHOULDERS       992  38.8%     -442     +438    -880    -1,393      +491  0.9748  LOSES
+  ASC-TRIANGLE             785  39.1%     -488     +553  -1,041      +215    -1,185  0.9900  LOSES
+  RISING-WEDGE             583  22.8%   -1,060   -1,251    +190    -1,145      -976  0.3327  LOSES
+  DOUBLE-BOTTOM            407  48.4%   -1,073     +621  -1,694    -3,575    +1,368  0.9878  LOSES
+  HEAD-SHOULDERS           333  39.6%     -418   -1,428  +1,010      -770       -71  0.0517  LOSES
+  DESC-TRIANGLE            295  41.7%      -28     -323    +295      -625      +550  0.3074  LOSES
+  BEAR-FLAG                226  28.8%   -1,971   -1,318    -653    -1,406    -2,527  0.8085  LOSES
+  TRIPLE-BOTTOM            206  49.0%     -892     +878  -1,770    -2,164      +285  0.9583  LOSES
+  CUP-HANDLE               181  38.7%     -228   +2,280  -2,508      -215      -241  0.9835  LOSES
+  SYM-TRIANGLE             111  29.7%   -1,542     +523  -2,065    -2,168      -926  0.9428  LOSES
+  PENNANT                   90  36.7%   -1,696     +800  -2,496       +35    -3,428  0.9225  LOSES
+  DOUBLE-TOP                81  50.6%   -2,027   -2,857    +830    -4,783      +409  0.3432  LOSES
+  TRIPLE-TOP                44  47.7%   -2,172   -4,561  +2,389    -1,985    -2,359  0.1732  LOSES
+  ------------------------------------------------------------------------------------------------
+  EVERYTHING             11133  39.9%     -440     +201    -641
+
+  HOW THE TRADES ENDED
+    TARGET       3474 (31.2%)   average   +9,684
+    STOP         6030 (54.2%)   average   -7,043
+    TIME         1629 (14.6%)   average   +2,411
+
+  LONG vs SHORT
+    LONG         8685       -304   control     +572
+    SHORT        2448       -925   control   -1,108
+
+  BY HOW FAR THE STOP WAS PLACED
+    stop 0-2% away          321       +186
+    stop 2-4% away         1472       -684
+    stop 4-6% away         2400       -404
+    stop 6-10% away         4056       -407
+    stop 10-100% away         2884       -462
+
+  BY REWARD ON OFFER (measured move vs the stop)
+    0-1 times the risk      4024       -732
+    1-2 times the risk      2876       -363
+    2-3 times the risk      1562        +26
+    3-5 times the risk      1329       -325
+    5-99 times the risk      1342       -386
+
+================================================================================
+   IS IT THE PATTERN, OR THE WAY IT IS TRADED?
+================================================================================
+============================================================================================
+  A. DOES THE ENTRY PREDICT ANYTHING?  no stop, no target, just hold
+============================================================================================
+  pattern                   n       5d     ctrl      10d     ctrl      20d     ctrl      40d     ctrl
+  ----------------------------------------------------------------------------------------
+  RECTANGLE              4369     -241     -119     -191     +172       -9     +756     +250   +1,288
+  FALLING-WEDGE          2863      -12     -211     +281     +184     +568     +419     +739   +1,496
+  BULL-FLAG              1525     -728      +76     -176     +764     +602   +1,405   +2,466   +3,691
+  INV-HEAD-SHOULDERS     1156     -183     -157     -640     +257     +448     +534   +2,059   +1,629
+  ASC-TRIANGLE            855     -158     +192     -245     +165     +328   +1,223     +670   +2,472
+  RISING-WEDGE            740     -499     -584     -968   -1,118   -1,947   -2,302   -2,677   -4,200
+  DOUBLE-BOTTOM           505     -420     -126     -888     +358      -67     +327     +824   +2,511
+  HEAD-SHOULDERS          389     -549     -545     -547     -702   -1,122   -1,296   -3,169   -3,453
+  DESC-TRIANGLE           303     +331     -336      -10     -463     -507   -1,691   -1,500   -2,394
+  TRIPLE-BOTTOM           251     -497     +431     -962     +250     +825   +2,052   +2,073   +2,542
+  BEAR-FLAG               230     -885     -257   -1,493     -959   -3,292   -1,148   -2,950   -2,621
+  CUP-HANDLE              184   -1,007     +624     -650      -22     +650     +201   +2,029   +2,877
+  SYM-TRIANGLE            114      -83     +219     -181   +1,304     +919     +999   +1,109   +2,439
+  PENNANT                  91     -997     +864     -809     +189     +462   +1,088   +1,716   +5,441
+  DOUBLE-TOP               81   -1,432     -164   -2,557   -1,748   -2,234   -3,035   -2,575   -1,827
+  TRIPLE-TOP               46   -1,517     -172   -2,773   -1,893   -3,827   -3,914   -2,456   -4,418
+
+============================================================================================
+  B. IS THE TEXTBOOK STOP TOO TIGHT?  same entries, wider stops
+============================================================================================
+  pattern                   n       1.0x       1.5x       2.0x       3.0x
+  ----------------------------------------------------------------------------------------
+  RECTANGLE              4369       -498       -390       -275       -248
+  FALLING-WEDGE          2863        -50       +177       +315       +398
+  BULL-FLAG              1525       -261       +464       +787     +1,107
+  INV-HEAD-SHOULDERS     1156       -596        -95       +354       +959
+  ASC-TRIANGLE            855       -532        -64       +204       +392
+  RISING-WEDGE            740       -924     -1,258     -1,414     -1,632
+  DOUBLE-BOTTOM           505     -1,002       -393        -87         +2
+  HEAD-SHOULDERS          389       -697     -1,038     -1,079     -1,372
+  DESC-TRIANGLE           303        -76       -250       -453        -20
+  TRIPLE-BOTTOM           251       -787       +533       +869       +878
+  BEAR-FLAG               230     -2,069     -2,315     -2,632     -2,122
+  CUP-HANDLE              184       -390        +35       +454       +940
+  SYM-TRIANGLE            114     -1,551     -1,286       -824       +554
+  PENNANT                  91     -1,630     -1,235     -1,046     -1,141
+  DOUBLE-TOP               81     -2,027     -2,322     -2,150     -1,720
+  TRIPLE-TOP               46     -2,449     -3,137     -2,140     -2,249
+
+================================================================================
+   THE FAIRER CONTROL — SAME DAY, DIFFERENT STOCK
+================================================================================
+================================================================================================
+  THE FAIRER CONTROL — same DAY, a different stock, same side, same hold
+================================================================================================
+  pattern                   n       10d     other     edge       20d     other     edge       40d     other     edge
+  --------------------------------------------------------------------------------------------
+  RECTANGLE              4121      -246      -609     +363       -88      -105      +17      +154      +347     -193
+  FALLING-WEDGE          2704      +290      +445     -155      +574    +1,223     -649      +834    +1,370     -536
+  BULL-FLAG              1407       -81       -30      -51      +725      +495     +230    +2,643    +2,061     +582
+  INV-HEAD-SHOULDERS     1206      -522      -336     -186      +793    +1,268     -475    +2,449    +3,212     -763
+  ASC-TRIANGLE            777      -387      -335      -52      +245      +311      -66      +757    +1,345     -588
+  RISING-WEDGE            687    -1,028    -1,062      +34    -2,082    -1,932     -150    -2,863    -3,757     +894
+  DOUBLE-BOTTOM           559      -703      +295     -998      +310    +1,477   -1,167    +1,166    +2,023     -857
+  HEAD-SHOULDERS          373      -603    -1,502     +899    -1,343    -1,569     +226    -3,582    -5,021   +1,440
+  TRIPLE-BOTTOM           271      -783      -900     +118    +1,011    +1,503     -492    +1,889    +4,067   -2,179
+  DESC-TRIANGLE           269      -334      -689     +355      -832      -461     -371    -2,107    -3,454   +1,346
+  BEAR-FLAG               215    -1,823    -1,511     -312    -3,439    -1,823   -1,616    -3,294    -2,457     -837
+  CUP-HANDLE              168    -1,117      +203   -1,320      +427      -103     +530    +2,180    +2,258      -77
+  SYM-TRIANGLE            107       +76       +63      +13      +904      +855      +49    +1,662    -1,211   +2,873
+  DOUBLE-TOP               93    -2,830    -2,980     +150    -2,952    -2,694     -258    -3,566    -5,126   +1,560
+  PENNANT                  85    -1,571      -635     -936      -460    +2,785   -3,246      +678    +1,938   -1,259
+  TRIPLE-TOP               51    -2,733    -3,884   +1,151    -4,620    -3,824     -796    -3,796    -2,754   -1,041
+
+  PATTERNS THAT BEAT A SAME-DAY COIN TOSS AT 40 DAYS
+    BULL-FLAG              1407    +2,643 vs    +2,061   p=0.1729  not significant
+    SYM-TRIANGLE            107    +1,662 vs    -1,211   p=0.0990  not significant
+
+================================================================================
+   15-MINUTE — 1 YEAR, 398 STOCKS
+================================================================================
+================================================================================================
+  CHART PATTERNS ON 15-MINUTE BARS — 1 year, 398 stocks, squared off 15:10
+================================================================================================
+  Money per trade at Rs 1,00,000, after 0.082% costs.
+  'other stock' is the same session and the same clock time, a coin toss.
+
+  pattern                trades     win       net  other stock     edge  1st half  2nd half       p
+  --------------------------------------------------------------------------------------------
+  RECTANGLE               15523   47.8%       -70          -36      -34       -59       -80  0.9977
+  BULL-FLAG                7455   42.5%       -24          -81      +57       -33       -15  0.0037
+  BEAR-FLAG                7163   47.2%        +7          -34      +41       -17       +28  0.0260
+  FALLING-WEDGE            6186   36.0%       -92          -52      -40       -95       -89  0.9720
+  RISING-WEDGE             4894   43.3%       -37          -55      +18        -9       -64  0.2199
+  DESC-TRIANGLE            3382   44.5%       -33          -52      +19       +14       -79  0.2319
+  HEAD-SHOULDERS           3211   45.4%        -8          -13       +5        -7        -8  0.4132
+  INV-HEAD-SHOULDERS       2627   42.7%       -40          -35       -5       -24       -54  0.5708
+  ASC-TRIANGLE             2351   38.7%      -102         -103       +1      -117       -86  0.4858
+  PENNANT                  2274   46.0%        +8          -49      +58       +22        -4  0.0566
+  CUP-HANDLE                729   39.4%       -73         -134      +61       -90       -57  0.1706
+  DOUBLE-BOTTOM             690   50.7%      +123          -14     +137        -0      +233  0.0410
+  DOUBLE-TOP                641   52.3%       -18          -89      +70       +12       -48  0.1766
+  TRIPLE-BOTTOM             465   48.6%       +62         -108     +170        +3      +119  0.0420
+  TRIPLE-TOP                358   46.4%       -96          -40      -56      -107       -85  0.7018
+  SYM-TRIANGLE              163   46.0%       +78         +115      -37      +208       -48  0.6205
+  --------------------------------------------------------------------------------------------
+  EVERYTHING              58112   44.4%       -41          -49       +8
+
+  HOW THEY ENDED
+    TARGET     7620 (13.1%)   average   +1,363
+    STOP      15300 (26.3%)   average   -1,031
+    TIME      35192 (60.6%)   average      +85
+
+  BY TIME OF DAY
+    09:30-10:30        13050        -68
+    10:30-11:30        11026        -35
+    11:30-12:30        10455        -22
+    12:30-13:30         8337        -16
+    13:30-15:10        15244        -49
+
+
+================================================================================
+   WHAT THIS DOES NOT SAY
+================================================================================
+
+  It does not say the patterns are imaginary. They are there on the chart and
+  the detector finds thousands of them. It says that once you pay Indian
+  costs, and once you compare against simply buying something on the same
+  morning, the shape adds nothing.
+
+  Bulkowski's own numbers look far better than this - 19% failure on a head
+  and shoulders top, 16% average decline. Three differences explain the gap,
+  and they are worth knowing:
+
+    1. His patterns are hand-picked from US charts. A person choosing which
+       ones "look right" is doing something the detector cannot copy - and
+       that judgement may be where the money actually is.
+    2. He measures to the ultimate high or low, not to a stop and a target.
+       A trade with no stop and infinite patience is not a trade.
+    3. He does not charge costs. At 0.222% a round trip on delivery, an edge
+       of a few tenths of a percent is gone before it starts.
+
+  The honest reading: if someone makes money with chart patterns, it is
+  probably not the pattern doing it. It is which ones they choose to take,
+  what they refuse, how big they go, and when they sit out.
+
+
+   WHAT I WOULD NOT DO NEXT
+
+  Keep cutting the data. Sixteen patterns x two timeframes is already 32
+  tests; slice each one by time of day, stop width and volume and something
+  will come out positive by luck alone. That is how the last four backtests
+  in this project nearly fooled us.
+
+================================================================================

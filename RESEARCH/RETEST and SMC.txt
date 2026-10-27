@@ -1,0 +1,152 @@
+================================================================================
+   RETEST vs BREAKOUT  —  and the SMC touch question
+   11/09/2026,  ASCENDRA CAPITAL
+================================================================================
+
+MM asked whether the entries and exits were right, and pointed at the one
+thing that was missing: every pattern had been tested on the BREAKOUT entry
+only. Buying the breakout is buying the worst price in the move, and switching
+to the pullback is exactly what turned the first SMC test from losing to
+making money before costs. So it deserved testing.
+
+Three entries, all sixteen patterns, both timeframes. Same stops, same
+targets, nothing else changed:
+
+   BREAK    the next bar's open after the confirming close
+   RETEST   a limit back AT the broken level, filled only if a later bar
+            actually trades there within 10 bars
+   HALF     a limit half way between the two
+
+An unfilled limit is counted as a MISS, not quietly dropped - otherwise
+"waiting for the pullback" just deletes the losers.
+
+   RESULT, per trade at Rs 1,00,000, after costs
+
+                       BREAK      RETEST        HALF
+      daily             -467        -445        -370
+      15-minute          -46         -59         -55
+
+It does not fix them. On daily the retest is 22 rupees better than the
+breakout and still loses; the half-way entry is the best of the three and
+still loses. On 15-minute bars the pullback is WORSE, because one trade in
+four never comes back and those are disproportionately the ones that ran.
+
+Two cells did turn positive on daily - bull flag (+193 retest, +221 half,
+from -143) and cup and handle (+701 on the half entry). They are 2 cells out
+of 96 tried, and both were already shown to lose to a same-day coin toss.
+They are not a finding, they are what 96 tries looks like.
+
+The full tables are in retest.txt.
+
+
+================================================================================
+   SMC — WHY THERE ARE NO CALLS, AND WHAT I CANNOT YET TELL YOU
+================================================================================
+
+The cause is settled and is not a bug: the 3-touch rule, raised from 2 on
+09/09, cut the CHoCH scan from 8-18 signals a day to 0-4. Replayed on real
+bars: 08/09 eight down to two, 09/09 eighteen down to four, 10/09 four down
+to zero. The "completed hours only" change costs almost nothing.
+
+WHAT I TRIED, AND WHY I AM NOT REPORTING THE NUMBER
+
+I replayed the CHoCH scan over a year at 2, 3 and 4 touches. It came back
+claiming a 93% win rate and Rs 1,246 a trade. That is not a result, it is a
+bug, and I checked it before telling you rather than after.
+
+The check: take the 504 real settled SMC calls out of the desk's own log and
+re-settle them with the backtest's own rules from the same candles. If the
+backtest is faithful it should reproduce what actually happened.
+
+      outcome        the record      my replay
+      target hit            129             40
+      stopped               223            287
+      timed out              48              0
+      never filled          104            177
+      win rate            32.2%          12.2%
+
+It agrees with the record on 54% of calls. It is not faithful, so nothing it
+says about 2 versus 3 touches means anything. Two faults found: the replay
+settles on HOUR bars, so the 15:10 square-off never fires (hour bars are
+stamped 14:15, never 15:10) - which is where the 48 missing time exits went;
+and the desk settles live calls across repeated intraday passes that a single
+end-of-day replay cannot reproduce.
+
+WHY YOUR OWN RECORD CANNOT ANSWER IT EITHER
+
+Of 553 live intraday SMC calls, 552 came from the OLD sweep detector. The
+CHoCH detector went live on 09/09 and has produced exactly ONE call. There is
+no live evidence on touch counts because there are no live CHoCH trades.
+
+THE SOLUTION I WOULD PUT TO YOU
+
+Put it back to 2 - not because 2 is better, but because at 3 the desk makes
+zero calls on a normal day, and a setting that produces no trades can never be
+tested. You would be stuck guessing for ever.
+
+Every CHoCH call already stamps its own touch count in the record ("3x level"
+in the swept column). So run at 2, let the calls accumulate for a few weeks,
+and then your OWN trades answer whether a level that held three times is worth
+more than one that held twice. That is the same rule we agreed on 03/09 for
+the score gate: do not tighten a filter on a backtest when a few weeks of real
+calls will settle it properly.
+
+Nothing has been changed. The desk is still at 3 touches.
+
+================================================================================
+
+
+
+==================================================================================================
+  RETEST vs BREAKOUT — DAILY, 3 years, 2,330 stocks
+==================================================================================================
+  pattern                    BREAK       n   missed     RETEST       n   missed       HALF       n   missed
+  ----------------------------------------------------------------------------------------------
+  RECTANGLE                   -473    3950       0%       -418    3199      19%       -351    3593       9%
+  FALLING-WEDGE                +16    2419       0%       -218    1510      23%        -82    1940      16%
+  BULL-FLAG                   -143    1413       0%       +193    1191      16%       +221    1319       7%
+  INV-HEAD-SHOULDERS          -565    1156       0%       -616     843      22%       -462     997      12%
+  ASC-TRIANGLE                -567     763       0%       -447     602      21%       -326     685      10%
+  RISING-WEDGE              -1,170     599       0%       -832     402      20%       -991     517      12%
+  DOUBLE-BOTTOM               -353     551       0%       -261     434      21%       -315     494      10%
+  HEAD-SHOULDERS              -887     357       0%     -1,254     256      21%     -1,101     302      13%
+  DESC-TRIANGLE               -363     267       0%       -714     214      20%       -587     241      10%
+  TRIPLE-BOTTOM               -473     264       0%       -572     208      21%       -493     236      11%
+  BEAR-FLAG                 -2,478     212       0%     -1,910     197       7%     -2,305     205       3%
+  CUP-HANDLE                  -300     168       0%       -238     139      17%       +701     161       4%
+  SYM-TRIANGLE              -1,733     105       0%     -2,477      81      23%     -1,872      95      10%
+  DOUBLE-TOP                -1,617      91       0%     -1,640      84       8%     -2,162      87       4%
+  PENNANT                   -2,527      86       0%     -1,662      76      12%     -1,783      83       3%
+  TRIPLE-TOP                -2,730      51       0%     -1,609      48       6%     -2,540      51       0%
+  ----------------------------------------------------------------------------------------------
+  ALL PATTERNS                -467   12452                -445    9484                -370   11006
+
+  'missed' is how often the limit never filled - those moves are gone,
+  and they are counted here rather than quietly dropped.
+
+==================================================================================================
+  RETEST vs BREAKOUT — 15-MINUTE, 1 year, 398 stocks
+==================================================================================================
+  pattern                    BREAK       n   missed     RETEST       n   missed       HALF       n   missed
+  ----------------------------------------------------------------------------------------------
+  RECTANGLE                    -75   20315       0%        -74   15693      30%        -68   18305      16%
+  BULL-FLAG                    -27    7661       0%        -54    6065      22%        -51    6846      12%
+  FALLING-WEDGE                -82    7408       0%        -83    3977      21%        -78    5415      19%
+  BEAR-FLAG                     +5    7232       0%        -16    5910      19%        -15    6494      10%
+  RISING-WEDGE                 -39    5654       0%        -54    3091      23%        -48    4087      20%
+  HEAD-SHOULDERS               -16    3612       0%        -62    1955      25%        -51    2555      22%
+  DESC-TRIANGLE                -36    3586       0%        -56    2530      30%        -50    3022      17%
+  INV-HEAD-SHOULDERS           -43    3105       0%        -57    1736      27%        -30    2344      20%
+  ASC-TRIANGLE                -103    2520       0%       -126    1763      32%       -129    2120      18%
+  PENNANT                       +4    2315       0%        -20    1883      19%        -27    2077      10%
+  DOUBLE-BOTTOM                +46     931       0%        +65     657      34%        +69     791      19%
+  DOUBLE-TOP                   -35     792       0%        -86     573      30%        -76     680      16%
+  CUP-HANDLE                   -69     753       0%       -154     540      28%       -118     637      16%
+  TRIPLE-BOTTOM                +71     590       0%        +78     418      32%        +44     490      20%
+  TRIPLE-TOP                   -70     421       0%        -98     308      29%       -107     367      15%
+  SYM-TRIANGLE                 +17     175       0%        +13     120      33%        +28     147      17%
+  ----------------------------------------------------------------------------------------------
+  ALL PATTERNS                 -46   67070                 -59   47219                 -55   56377
+
+  'missed' is how often the limit never filled - those moves are gone,
+  and they are counted here rather than quietly dropped.

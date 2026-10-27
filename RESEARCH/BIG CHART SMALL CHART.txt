@@ -1,0 +1,166 @@
+================================================================================
+   PATTERN ON THE BIG CHART, ENTRY ON THE SMALL ONE
+   Tested 11/09/2026 for ASCENDRA CAPITAL
+================================================================================
+
+MM was right that this had never been tested. Both earlier runs found the
+pattern and took the trade on the SAME chart. That throws away the one real
+mechanical advantage the method has, and he said so:
+
+   "we have to see the pattern on bigger time frame and entry and exit in
+    smaller time frame ... then we can make money for sure"
+
+WHAT THE COMBINATION DOES
+
+   target   from the BIG chart - the measured move, unchanged
+   stop     from the SMALL chart - the low of the little pullback, instead of
+            the far side of the whole pattern
+
+THE ENTRY RULE, fixed before the test
+
+   1. the pattern completes on the big chart - a bar CLOSES beyond the trigger
+   2. drop to the small chart and WAIT. Nothing is bought while price runs.
+   3. price must pull back toward the level it just broke
+   4. entry: the first small bar that CLOSES beyond the previous small bar's
+      high (its low for a short), filled at the NEXT bar's open
+   5. stop: the lowest low of that pullback
+   6. target: the big chart's measured move, unchanged
+   7. no entry within three big bars = MISSED, and counted as a miss
+
+Costs follow what the trade did: same day 0.082%, held overnight 0.222% for a
+long and 0.07% for a short in futures - shorts overnight only in the 216
+stocks that have them. Rs 5 crore a day liquidity throughout.
+
+
+================================================================================
+   THE RESULT — HE WAS RIGHT ABOUT THE MECHANISM
+================================================================================
+
+   combination            trades  win    risk    COMBINED   ONE CHART   risk
+   ------------------------------------------------------------------------
+   DAILY  -> 15-MIN        1,708  10.5%  1.12%      -Rs 93    -Rs 976   6.86%
+   DAILY  -> HOURLY        1,631  16.6%  1.79%     -Rs 107    -Rs 937   6.72%
+   75-MIN -> 15-MIN        8,512  17.2%  0.82%     -Rs 141    -Rs 392   2.82%
+   HOURLY -> 15-MIN        9,042  17.6%  0.79%     -Rs 147    -Rs 337   2.53%
+   WEEKLY -> DAILY         1,218  24.1%  4.77%     -Rs 293  -Rs 1,340  16.88%
+
+Every single combination is a large improvement on taking the same pattern on
+one chart. On the daily patterns the risk per trade falls from 6.9% to 1.1%
+and the loss shrinks by 90%. The idea is mechanically sound and it does what
+he said it would do.
+
+It does not cross zero. Not one of the five.
+
+
+================================================================================
+   THE STOP — the one knob worth turning, and it does not save it
+================================================================================
+
+At a 1.1% stop against a measured move roughly ten times that, breakeven needs
+a 10% win rate. The system wins 10.5%. That is not a strategy, it is a coin
+balanced on its edge - a few paise of slippage a trade decides it either way.
+
+So the stop was widened. Four settings, declared in advance, judged on both
+halves. Twenty cells in total:
+
+   DAILY > 15-MIN     1.0x -105   1.5x  -97   2.0x -145   3.0x  -88
+   DAILY > HOURLY     1.0x  -72   1.5x -180   2.0x -241   3.0x -199
+   75-MIN > 15-MIN    1.0x -140   1.5x -145   2.0x -150   3.0x -122
+
+All twenty lose. The best cell in the whole study is DAILY pattern with an
+HOURLY entry at the pullback low: -Rs 72 a trade.
+
+
+================================================================================
+   THE WARNING THAT MATTERS MORE THAN THE AVERAGE
+================================================================================
+
+Every daily-based combination is heavily NEGATIVE in the first half of the
+year and POSITIVE in the second:
+
+   DAILY > 15-MIN      1st half  -Rs 400      2nd half  +Rs 190
+   DAILY > HOURLY      1st half  -Rs 569      2nd half  +Rs 423
+   DAILY > 15-MIN 3x   1st half  -Rs 926      2nd half  +Rs 737
+
+That is the calendar talking, not an edge. Which half of the year you test
+decides the answer, and a rule whose sign depends on the period is not a rule.
+The one combination that IS stable across both halves - 75-minute patterns
+with 15-minute entries, -149 and -131 - is stably negative.
+
+If the second half were the real number, six more months of live calls would
+show it. That is the only honest way to settle it, and it costs nothing but
+patience: the calls can be recorded without a rupee being deployed, exactly
+the way the SMC tab already works.
+
+
+================================================================================
+   WHAT I WOULD NOT DO NEXT
+================================================================================
+
+Turn a third knob. Five combinations x four stops is twenty cells already, on
+top of the sixteen patterns x three entries x two timeframes from this
+morning. Keep slicing and something will come out positive by luck alone.
+
+The finding stands on its own and it is not nothing: MM's method takes the
+same signal from -Rs 976 to -Rs 93. The signal is still the problem, not the
+execution.
+
+================================================================================
+
+
+===========================================================================================================
+  PATTERN ON THE BIG CHART, ENTRY AND STOP ON THE SMALL ONE
+===========================================================================================================
+  Money per trade at Rs 1,00,000 after costs. 'risk' is how far the stop
+  sat from the entry - the whole reason for doing this. '1 chart' is the
+  SAME pattern taken the old way, on the big chart alone, for comparison.
+
+  combination                 trades missed    win    risk   MTF net    1 chartits risk  1st half  2nd half
+  ---------------------------------------------------------------------------------------------------------
+  HOURLY pattern, 15MIN entry    9042     55%   17.6%    0.79%      -147       -337    2.53%      -167      -126
+  75MIN pattern, 15MIN entry    8512     51%   17.2%    0.82%      -141       -392    2.82%      -147      -136
+  DAILY pattern, HOURLY entry    1631     44%   16.6%    1.79%      -107       -937    6.72%      -622      +408
+  DAILY pattern, 15MIN entry    1708     40%   10.5%    1.12%       -93       -976    6.86%      -473      +278
+  WEEKLY pattern, DAILY entry    1218     54%   24.1%    4.77%      -293     -1,340   16.88%      -241      -345
+
+  BEST COMBINATION: DAILY>15MIN   (-93 a trade)
+  ----------------------------------------------------------------------
+    pattern                 trades     win    risk       net
+    RECTANGLE                  703   10.8%   1.01%      -424
+    BULL-FLAG                  164   13.4%   1.26%      +407
+    FALLING-WEDGE              155   12.9%   1.30%    +1,373
+    RISING-WEDGE               110    4.5%   1.15%      -763
+    DESC-TRIANGLE              104   11.5%   1.02%      -213
+    ASC-TRIANGLE                94   12.8%   1.13%      +164
+    BEAR-FLAG                   89    3.4%   1.15%      -794
+    INV-HEAD-SHOULDERS          80    8.8%   1.23%      -204
+    HEAD-SHOULDERS              70    7.1%   1.00%      -500
+    DOUBLE-BOTTOM               32   12.5%   1.43%      +462
+    DOUBLE-TOP                  30    3.3%   1.30%      -970
+
+    how it ended            trades                       net
+    TARGET                     139                   +10,014
+    STOP                      1522                    -1,168
+    TIME                        47                    +4,820
+
+============================================================================================
+  HOW WIDE SHOULD THE SMALL-CHART STOP BE?
+============================================================================================
+  1.0x is the pullback low itself. The rest widen that same distance.
+
+  combination               stop  trades    win   risk      net  1st half  2nd half
+  ------------------------------------------------------------------------------------
+  DAILY > 15MIN             1.0x    1860  10.1%  1.08%     -105      -400      +190
+  DAILY > 15MIN             1.5x    1799  14.5%  1.60%      -97      -438      +237
+  DAILY > 15MIN             2.0x    1749  17.9%  2.11%     -145      -586      +290
+  DAILY > 15MIN             3.0x    1681  24.9%  3.01%      -88      -926      +737
+
+  DAILY > HOURLY            1.0x    1664  16.8%  1.79%      -72      -569      +423
+  DAILY > HOURLY            1.5x    1614  22.1%  2.64%     -180      -777      +407
+  DAILY > HOURLY            2.0x    1590  26.7%  3.43%     -241      -967      +473
+  DAILY > HOURLY            3.0x    1510  34.8%  4.72%     -199    -1,196      +787
+
+  75MIN > 15MIN             1.0x    8701  17.7%  0.83%     -140      -149      -131
+  75MIN > 15MIN             1.5x    8417  24.1%  1.24%     -145      -150      -140
+  75MIN > 15MIN             2.0x    8211  29.0%  1.62%     -150      -172      -128
+  75MIN > 15MIN             3.0x    7980  37.0%  2.37%     -122      -156       -88

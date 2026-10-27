@@ -1,0 +1,283 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ascendra — the layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans+Condensed:wght@400;600;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#0A0D0C;--panel:#101514;--panel2:#151C1A;--line:#202B28;--line2:#2C3A36;
+ --ink:#E4EBE8;--ink2:#95A5A0;--ink3:#63736E;--accent:#E9A13B;--long:#3DC98A;--short:#EF5A52;
+ --r1:3px;--r2:6px;--mono:'IBM Plex Mono',monospace;
+ --cond:'IBM Plex Sans Condensed',sans-serif;--sans:'IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:13px;
+ line-height:1.45;-webkit-font-smoothing:antialiased;padding:20px 14px 60px}
+h1{font-family:var(--cond);font-size:19px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 4px}
+.sub{color:var(--ink3);font-size:12px;margin:0 0 22px;max-width:70ch;line-height:1.65}
+.wrap{max-width:1040px;margin:0 auto 30px;border:1px solid var(--line2);border-radius:var(--r2);
+ overflow:hidden;background:var(--panel)}
+.cap{padding:10px 16px;background:var(--panel2);border-bottom:1px solid var(--line);
+ font-family:var(--cond);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line)}
+.brand{font-family:var(--cond);font-weight:700;font-size:15px;letter-spacing:.14em}
+.netw{margin-left:auto;text-align:right}
+.netw .n{font-family:var(--mono);font-weight:700;font-size:18px}
+.netw .b{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:2px}
+.tabs{display:flex;gap:1px;flex-wrap:wrap;padding:0 16px;border-bottom:1px solid var(--line)}
+.tab{font-family:var(--cond);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+ padding:10px 11px;color:var(--ink3);border-bottom:2px solid transparent;white-space:nowrap}
+.tab.on{color:var(--ink);border-bottom-color:var(--accent)}
+.subs{display:flex;gap:15px;padding:8px 16px;border-bottom:1px solid var(--line);
+ font-family:var(--cond);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
+.subs .on{color:var(--accent)}
+.body{padding:13px 16px 18px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px;margin-bottom:11px}
+.tile{border:1px solid var(--line2);border-radius:var(--r1);padding:9px 12px;background:var(--panel2)}
+.tile .v{font-family:var(--mono);font-weight:700;font-size:19px;line-height:1.1}
+.tile .k{font-family:var(--cond);font-size:9px;letter-spacing:.13em;text-transform:uppercase;
+ color:var(--ink3);margin-top:4px}
+.roc{border:1px solid var(--line2);border-radius:var(--r1);padding:9px 14px;background:var(--panel2);
+ font-size:11.5px;color:var(--ink2);margin-bottom:12px}
+.roc b{font-family:var(--mono);color:var(--ink)}
+.day{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:15px 0 0;padding:7px 0 6px;
+ border-bottom:1px solid var(--line)}
+.day .d{font-family:var(--cond);font-size:12px;letter-spacing:.13em;text-transform:uppercase}
+.day .s{font-size:10.5px;color:var(--ink3)}
+.day .m{margin-left:auto;font-family:var(--mono);font-weight:700;font-size:12.5px}
+table{width:100%;border-collapse:collapse;font:400 11.5px/1.5 var(--mono)}
+th{font-family:var(--cond);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);
+ text-align:right;padding:8px 6px;border-bottom:1px solid var(--line2);font-weight:600}
+th:nth-child(-n+3){text-align:left}
+td{padding:6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+td:nth-child(-n+3){text-align:left}
+tbody tr:hover td{background:var(--panel2);cursor:pointer}
+.sym{font-family:var(--cond);font-weight:700;font-size:12.5px}
+.sc{display:inline-block;border:1px solid var(--long);color:var(--long);border-radius:2px;
+ padding:0 5px;font-size:9.5px;margin-left:5px}
+.sc.hi{border-color:var(--accent);color:var(--accent)}
+.bk{display:inline-block;border:1px solid var(--line2);color:var(--ink2);border-radius:2px;
+ padding:0 5px;font-size:8.5px;letter-spacing:.08em;margin-left:5px}
+.up{color:var(--long)}.dn{color:var(--short)}.mid{color:var(--ink3)}
+.L{color:var(--long)}.S{color:var(--short)}
+.m2m{font-size:8.5px;color:var(--ink3);letter-spacing:.1em}
+.scroll{overflow-x:auto}
+.miss td{opacity:.5}
+@media(max-width:640px){.netw{width:100%;margin-left:0;text-align:left}}
+</style></head><body>
+
+<h1>Ascendra — the new layout</h1>
+<p class="sub">Every tab, in the order we agreed: Today, Patterns, SMC, OI, Commodities, Trades done, Record, Backtest. One shape for every tab. Score beside the stock name, no filter
+pills. Open trades carry M2M, clearly labelled, and M2M is never added into a
+total that contains booked money. Numbers are illustrative.</p>
+
+<div class="wrap">
+  <div class="cap">Patterns — Live</div>
+  <div class="top"><span class="brand">ASCENDRA</span>
+    <span style="font-size:11px;color:var(--ink3)">Patterns <b style="font-family:var(--mono);color:var(--ink2)">10</b>
+      &nbsp; SMC <b style="font-family:var(--mono);color:var(--ink2)">24</b></span>
+    <span class="netw"><span style="font-size:11px;color:var(--ink3)">booked </span>
+      <span class="n up">+₹2,64,100</span>
+      <div class="b">(Patterns <span class="up">+₹2,68,010</span> · SMC <span class="dn">−₹3,910</span>)</div></span></div>
+  <div class="tabs"><span class="tab">Today</span><span class="tab on">Patterns</span>
+    <span class="tab">SMC</span><span class="tab">OI</span><span class="tab">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab">Record</span>
+    <span class="tab">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="subs"><span class="on">Live</span><span>Waiting</span></div>
+  <div class="body">
+    <div class="tiles">
+      <div class="tile"><div class="v up">31</div><div class="k">✓ wins</div></div>
+      <div class="tile"><div class="v dn">48</div><div class="k">✗ losses</div></div>
+      <div class="tile"><div class="v">39%</div><div class="k">win rate</div></div>
+      <div class="tile"><div class="v" style="color:var(--accent)">10</div><div class="k">open now</div></div>
+      <div class="tile"><div class="v up">+5.3%</div><div class="k">on ₹50L</div></div>
+    </div>
+    <div class="roc"><b>+₹2,64,100</b> booked from 79 closed trades on
+      <b>₹50,00,000</b> — <b>+5.3%</b>. 10 open, holding <b>₹36.0L</b>,
+      <b>₹14.0L</b> free. 4 calls passed today, no slot.</div>
+
+    <div class="day"><span class="d">Thu, 24 Sep</span>
+      <span class="s">4 calls · 2 filled · 1 stopped · 1 waiting</span>
+      <span class="m up">+₹8,420</span></div>
+    <div class="scroll"><table>
+      <thead><tr><th>time</th><th>stock</th><th>side</th><th>buy at</th><th>stop</th>
+        <th>target</th><th>now</th><th>M2M</th><th>result</th></tr></thead>
+      <tbody>
+        <tr><td>09:26</td><td><span class="sym">SHAMART</span><span class="sc">8</span><span class="bk">POSITIONAL ₹4L</span></td>
+          <td class="L">▲ LONG</td><td>482.65</td><td class="dn">464.15</td><td class="up">529.30</td>
+          <td>498.10</td><td class="up">+₹12,800 <span class="m2m">M2M</span></td><td class="up">you're in this</td></tr>
+        <tr><td>11:15</td><td><span class="sym">GABRIEL</span><span class="sc hi">9</span><span class="bk">POSITIONAL ₹4L</span></td>
+          <td class="L">▲ LONG</td><td>1467.90</td><td class="dn">1271.41</td><td class="up">1628.70</td>
+          <td>1429.90</td><td class="mid">—</td><td class="mid">order placed, waiting</td></tr>
+        <tr><td>13:45</td><td><span class="sym">JIOFIN</span><span class="sc">8</span><span class="bk">SWING ₹2L</span></td>
+          <td class="S">▼ SHORT</td><td>329.40</td><td class="dn">338.90</td><td class="up">310.20</td>
+          <td>321.05</td><td class="up">+₹5,080 <span class="m2m">M2M</span></td><td class="up">half booked, rest running</td></tr>
+        <tr><td>14:00</td><td><span class="sym">KPITTECH</span><span class="sc">8</span><span class="bk">SWING ₹2L</span></td>
+          <td class="L">▲ LONG</td><td>1284.90</td><td class="dn">1237.30</td><td class="up">1371.00</td>
+          <td>1235.10</td><td class="dn">−₹7,440</td><td class="dn">stopped out</td></tr>
+        <tr class="miss"><td>14:12</td><td><span class="sym">TECHM</span><span class="sc">8</span><span class="bk">no slot</span></td>
+          <td class="L">▲ LONG</td><td>1642.00</td><td class="dn">1618.00</td><td class="up">1690.00</td>
+          <td>1671.40</td><td class="mid">—</td><td class="mid">no capital free</td></tr>
+      </tbody></table></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="cap">SMC — same shape, one number only</div>
+  <div class="tabs"><span class="tab">Today</span><span class="tab">Patterns</span>
+    <span class="tab on">SMC</span><span class="tab">OI</span><span class="tab">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab">Record</span>
+    <span class="tab">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="subs"><span class="on">Live</span><span>Waiting</span></div>
+  <div class="body">
+    <div class="tiles">
+      <div class="tile"><div class="v up">486</div><div class="k">✓ wins</div></div>
+      <div class="tile"><div class="v dn">1,193</div><div class="k">✗ losses</div></div>
+      <div class="tile"><div class="v">29%</div><div class="k">win rate</div></div>
+      <div class="tile"><div class="v" style="color:var(--accent)">25</div><div class="k">open now</div></div>
+      <div class="tile"><div class="v dn">−8.1%</div><div class="k">on ₹50L</div></div>
+    </div>
+    <div class="roc"><b class="dn">−₹4,06,200</b> booked from 1,679 closed trades
+      on <b>₹50,00,000</b> — <b class="dn">−8.1%</b>. 25 open, all ₹50L in use,
+      nothing free. <b>760 calls passed</b>, no slot.</div>
+    <div class="day"><span class="d">Thu, 24 Sep</span>
+      <span class="s">129 calls · 25 filled · 104 no capital</span>
+      <span class="m dn">−₹14,310</span></div>
+    <div class="scroll"><table>
+      <thead><tr><th>time</th><th>stock</th><th>side</th><th>sell at</th><th>stop</th>
+        <th>target</th><th>now</th><th>M2M</th><th>result</th></tr></thead>
+      <tbody>
+        <tr><td>09:45</td><td><span class="sym">HINDALCO</span><span class="bk">₹2L</span></td>
+          <td class="S">▼ SHORT</td><td>976.00</td><td class="dn">993.50</td><td class="up">941.00</td>
+          <td>969.20</td><td class="up">+₹1,393 <span class="m2m">M2M</span></td><td class="up">you're in this</td></tr>
+        <tr><td>10:30</td><td><span class="sym">CIPLA</span><span class="bk">₹2L</span></td>
+          <td class="S">▼ SHORT</td><td>1378.30</td><td class="dn">1405.20</td><td class="up">1324.50</td>
+          <td>1405.20</td><td class="dn">−₹3,903</td><td class="dn">stopped out</td></tr>
+        <tr class="miss"><td>10:31</td><td><span class="sym">TECHM</span><span class="bk">no slot</span></td>
+          <td class="L">▲ LONG</td><td>1642.00</td><td class="dn">1618.00</td><td class="up">1690.00</td>
+          <td>1671.40</td><td class="mid">—</td><td class="mid">no capital free</td></tr>
+      </tbody></table></div>
+  </div>
+</div>
+<div class="wrap"><div class="cap">1 · Today<div class="capw">What is running right
+  now, nothing else. No date grouping — today is one day.</div></div>
+  <div class="tabs"><span class="tab on">Today</span><span class="tab">Patterns</span>
+    <span class="tab">SMC</span><span class="tab">OI</span><span class="tab">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab">Record</span>
+    <span class="tab">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="body">
+    <div class="eng">
+      <div class="ecard"><div class="en">Patterns</div><div class="ev up">+₹2,68,010</div>
+        <div class="ek">booked · 10 open holding ₹36.0L · ₹14.0L free</div></div>
+      <div class="ecard"><div class="en">SMC</div><div class="ev dn">−₹4,06,200</div>
+        <div class="ek">booked · 25 open holding ₹50.0L · nothing free</div></div>
+    </div>
+    <div class="roc">Place <b>2</b> orders today. Nothing to exit.
+      <b>3</b> positions are within 1% of their stop.</div>
+    <div class="day"><span class="d">Open right now</span>
+      <span class="s">12 positions across both books</span>
+      <span class="m up">+₹19,273 M2M</span></div>
+    <div class="scroll"><table>
+      <thead><tr><th>since</th><th>stock</th><th>side</th><th>buy at</th><th>stop</th>
+        <th>target</th><th>now</th><th>M2M</th><th>held</th></tr></thead>
+      <tbody>
+        <tr><td>12 Sep</td><td><span class="sym">SHAMART</span><span class="sc">8</span><span class="bk">POSITIONAL ₹4L</span></td>
+          <td class="L">▲ LONG</td><td>482.65</td><td class="dn">464.15</td><td class="up">529.30</td>
+          <td>498.10</td><td class="up">+₹12,800 <span class="m2m">M2M</span></td><td>12 days</td></tr>
+        <tr><td>21 Sep</td><td><span class="sym">JIOFIN</span><span class="sc">8</span><span class="bk">SWING ₹2L</span></td>
+          <td class="S">▼ SHORT</td><td>329.40</td><td class="dn">338.90</td><td class="up">310.20</td>
+          <td>321.05</td><td class="up">+₹5,080 <span class="m2m">M2M</span></td><td>3 days</td></tr>
+      </tbody></table></div>
+  </div></div>
+
+<!-- COMMODITIES -->
+<div class="wrap"><div class="cap">4 · Commodities<div class="capw">Same shape.
+  20-day breakout, long only, with TRIX, Choppiness and Balance of Power
+  agreeing.</div></div>
+  <div class="tabs"><span class="tab">Today</span><span class="tab">Patterns</span>
+    <span class="tab">SMC</span><span class="tab">OI</span><span class="tab on">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab">Record</span>
+    <span class="tab">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="subs"><span class="on">Live</span><span>Waiting</span></div>
+  <div class="body">
+    <div class="tiles">
+      <div class="tile"><div class="v up">6</div><div class="k">✓ wins</div></div>
+      <div class="tile"><div class="v dn">4</div><div class="k">✗ losses</div></div>
+      <div class="tile"><div class="v">60%</div><div class="k">win rate</div></div>
+      <div class="tile"><div class="v" style="color:var(--accent)">2</div><div class="k">open now</div></div>
+      <div class="tile"><div class="v up">+2.1%</div><div class="k">on ₹10L</div></div>
+    </div>
+    <div class="roc"><b>+₹21,400</b> booked from 10 closed trades on <b>₹10,00,000</b>.
+      Backtest over 5.5 years: <b>+₹5,776</b> a trade on the base metals,
+      <b>+₹13,642</b> on gold and silver.</div>
+    <div class="day"><span class="d">Thu, 24 Sep</span><span class="s">1 call · 1 filled</span>
+      <span class="m up">+₹3,180</span></div>
+    <div class="scroll"><table>
+      <thead><tr><th>time</th><th>contract</th><th>side</th><th>buy at</th><th>stop</th>
+        <th>target</th><th>now</th><th>M2M</th><th>result</th></tr></thead>
+      <tbody><tr><td>10:15</td><td><span class="sym">GOLDM</span><span class="bk">1 LOT</span></td>
+        <td class="L">▲ LONG</td><td>74,820</td><td class="dn">73,100</td><td class="up">78,260</td>
+        <td>75,410</td><td class="up">+₹3,180 <span class="m2m">M2M</span></td>
+        <td class="up">you're in this</td></tr></tbody></table></div>
+  </div></div>
+
+<!-- RECORD -->
+<div class="wrap"><div class="cap">7 · Record<div class="capw">Every call ever made —
+  taken, waiting, stopped, and the ones there was no capital for.</div></div>
+  <div class="tabs"><span class="tab">Today</span><span class="tab">Patterns</span>
+    <span class="tab">SMC</span><span class="tab">OI</span><span class="tab">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab on">Record</span>
+    <span class="tab">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="body">
+    <div style="margin-bottom:11px">
+      <span class="pill on">Patterns</span><span class="pill">SMC</span>
+      <span class="pill">Commodities</span>
+      <span style="margin-left:14px"><span class="pill">everything</span>
+      <span class="pill on">no capital</span></span></div>
+    <div class="roc"><b>1,351</b> calls on record. <b>139</b> taken,
+      <b>1,212</b> passed for want of a slot. Those passed would have made
+      <b class="up">+₹3,940</b> a trade against <b class="up">+₹4,242</b> on the
+      ones taken — so the capital, not the engine, is the limit.</div>
+    <div class="day"><span class="d">Thu, 24 Sep</span><span class="s">4 calls · 1 passed</span>
+      <span class="m mid">—</span></div>
+    <div class="scroll"><table>
+      <thead><tr><th>time</th><th>stock</th><th>side</th><th>buy at</th><th>stop</th>
+        <th>target</th><th>why not taken</th><th>would have made</th></tr></thead>
+      <tbody><tr class="miss"><td>14:12</td>
+        <td><span class="sym">TECHM</span><span class="sc">8</span><span class="bk">POSITIONAL</span></td>
+        <td class="L">▲ LONG</td><td>1642.00</td><td class="dn">1618.00</td><td class="up">1690.00</td>
+        <td class="mid">all 10 slots full</td><td class="up">+₹7,160</td></tr></tbody></table></div>
+  </div></div>
+
+<!-- BACKTEST -->
+<div class="wrap"><div class="cap">8 · Backtest<div class="capw">What each engine
+  would have done over three years, so you know what to expect.</div></div>
+  <div class="tabs"><span class="tab">Today</span><span class="tab">Patterns</span>
+    <span class="tab">SMC</span><span class="tab">OI</span><span class="tab">Commodities</span>
+    <span class="tab">Trades done</span><span class="tab">Record</span>
+    <span class="tab on">Backtest</span><span class="tab" style="margin-left:12px">More ▾</span></div>
+  <div class="body">
+    <div style="margin-bottom:11px"><span class="pill on">Patterns</span>
+      <span class="pill">SMC</span><span class="pill">Commodities</span>
+      <span class="pill">all together</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="v">938</div><div class="k">trades</div></div>
+      <div class="tile"><div class="v">39%</div><div class="k">win rate</div></div>
+      <div class="tile"><div class="v up">+₹4,242</div><div class="k">a trade</div></div>
+      <div class="tile"><div class="v">63</div><div class="k">days held</div></div>
+      <div class="tile"><div class="v up">+19.7%</div><div class="k">a year on ₹50L</div></div>
+    </div>
+    <div class="roc">Positional, rating 8 and up, longs only, three years to
+      Sep 2026. Stop on the candle close, target at 4× the risk. Pays on both
+      halves of the market.</div>
+    <div class="scroll"><table>
+      <thead><tr><th>band</th><th>trades</th><th>a month</th><th>win rate</th>
+        <th>a trade</th><th>both halves</th></tr></thead>
+      <tbody>
+        <tr><td>rated 8</td><td>743</td><td>22</td><td>39%</td><td class="up">+₹4,121</td><td class="up">yes</td></tr>
+        <tr><td>rated 9</td><td>43</td><td>1</td><td>40%</td><td class="up">+₹3,093</td><td class="up">yes</td></tr>
+        <tr><td>rated 10</td><td>152</td><td>5</td><td>38%</td><td class="up">+₹5,157</td><td class="up">yes</td></tr>
+        <tr style="opacity:.55"><td>rated 7 — excluded</td><td>413</td><td>12</td><td>31%</td>
+          <td class="dn">−₹186</td><td class="dn">no</td></tr>
+      </tbody></table></div>
+  </div></div>
+</body></html>

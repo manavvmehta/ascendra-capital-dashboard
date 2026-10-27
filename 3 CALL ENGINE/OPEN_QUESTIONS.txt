@@ -1,0 +1,96 @@
+================================================================================
+OPEN QUESTIONS — THE EQUITY CALL ENGINE
+================================================================================
+
+Every one of these is a choice someone had to make, made without evidence.
+They are in the live code now, shaping real calls.
+
+Change ONE thing at a time and report each separately, or there is no way to
+tell which change did what.
+
+
+Q1.  THE SCORE DOES NOT WORK.  <- start here
+     A confluence score decides what fires (>= 6.5) and what is
+     silently filed as "watching". Across 479 resolved calls its rank
+     correlation with R is near zero.
+     It is also confounded: SQUEEZE only ever publishes at one score, and the
+     highest scores are almost all BREAKOUT-20D, so a high-vs-low comparison
+     compares setups rather than conviction.
+     ASK: rebuild it, re-weight it per setup, or abandon it for a simple
+     per-setup filter? If the score has no signal, what should gate instead?
+
+Q2.  THE SHORTLIST IS UNVALIDATED.
+     Only the top 25 names by a cheap snapshot formula ever get
+     15-minute candles. Everything else is invisible, however good its setup.
+     The formula: relative volume x2, plus range/ATR, plus |%change| x0.3,
+     plus how close price sits to the day's extreme.
+     ASK: what is that costing? Is relative volume the right leading term?
+     Should the count be larger?
+
+Q3.  PULLBACK IS THE WEAKEST SETUP AND HAS THE SOFTEST GATE.
+     +0.068R over 125 trades, confidence interval crossing zero. It is also
+     the only setup where participation merely scores instead of blocking.
+     ASK: should it gate at 1.1x like the
+     others? Or is the pullback simply not an edge?
+
+Q4.  THE SWING STOP.
+     BREAKOUT-20D uses 2x daily ATR, tightened to just under the broken level.
+     It has the widest outcome spread of any setup (sd 1.62 against ~1.0 for
+     the intraday ones) and only a 41% win rate.
+     ASK: is 2x ATR right for a swing breakout, or should the stop sit under
+     the level only? What does that do to the spread?
+
+Q5.  NO MARKET CONTEXT ANYWHERE.
+     Every call is judged in isolation. A long fires the same way whether the
+     index is up 1% or down 2%.
+     ASK: should longs be suppressed in a falling market — and can that be
+     shown, or is it curve-fitting? The `mkt_nifty_pts` and `mkt_flow` columns
+     record the market state at signal time, so it is testable.
+
+Q6.  THE TIME EXIT.
+     Intraday calls are closed at 15:10 regardless. Chosen to stay clear of
+     the closing auction.
+     ASK: is that leaving money on the table or saving it? TIME_EXIT is
+     the second most common outcome in the data, so it matters.
+
+Q7.  ORB HAS ALMOST NO SAMPLE.
+     Five trades. Its window (09:45-11:30) and its opening-range width
+     constraint (0.2 to 0.9 of daily ATR) are both narrow.
+     ASK: are those constraints right, or are they starving a good setup?
+
+Q8.  THE PARTICIPATION THRESHOLDS.
+     1.1x / 1.3x / 1.5x / 2.5x / 1.2x, per setup, set by judgement.
+     The 2.5x on BREAKOUT-20D has one piece of evidence behind it: over three
+     weeks, breakouts under 2.5x went 0 wins / 7 stops. The rest have none.
+     ASK: are they in the right places?
+
+
+--------------------------------------------------------------------------------
+HOW TO WORK WITH calls.csv
+--------------------------------------------------------------------------------
+
+  624 rows, 51 columns, 21 Jul - 1 Sep 2026. 479 have a final R.
+
+  status      T2_HIT, T1_TRAIL_OUT, SL_HIT, TIME_EXIT are resolved.
+              EXPIRED means the entry was never reached — not a loss, a
+              non-event. VOID_* means tracking failed; exclude those.
+  r           the outcome in R. -1.0 is a full stop.
+  score       what fired it. >= 6.5 published.
+  comp_*      the score broken into its parts. Only on schema_version 2.
+  instr_*     measurements at signal time — participation, ATR, ADX, RSI,
+              distance to VWAP and EMA20. Only on schema_version 2.
+
+  RISK IS entry MINUS risk0. Do NOT use the `sl` column for that: the engine
+  moves the stop to breakeven after T1, so on any row that reached T1 the
+  stored stop is not the stop the trade was taken with. This has already
+  produced one wrong analysis.
+
+  REFUSE TO CONCLUDE ON n < 30. A documented finding here ("the 8.0 bucket
+  underperforms 7.0") was repeated for weeks and dissolved on a proper sample:
+  -0.138R with a 95% interval of [-0.568, +0.281].
+
+  analysis_score_check.py is the script that found that. Read it before
+  writing your own — it already handles the bucketing, the confidence
+  intervals and the per-setup confound.
+
+================================================================================

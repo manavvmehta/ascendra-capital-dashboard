@@ -1,0 +1,105 @@
+================================================================================
+   EVERY STRATEGY, BIG CHART FOR THE SIGNAL, SMALL CHART FOR THE ENTRY
+   11/09/2026,  ASCENDRA CAPITAL
+================================================================================
+
+MM: "have you backtested everything i said with time frame combination in each
+and every strategy?" He was right - only the chart patterns had been. This is
+the rest: SMC, Fibonacci, the four intraday setups, BREAKOUT-20D and the
+candlestick patterns, all put through the same test.
+
+THE RULE, identical for all six so the results mean the same thing
+
+   the SIGNAL and the TARGET come from the strategy itself, unchanged
+   the ENTRY and the STOP move to the small chart:
+       wait for a pullback toward the level the signal is built on
+       enter on the first small bar that closes beyond the previous one
+       stop at the low of that pullback
+       no entry within three big bars = MISSED, and counted as a miss
+
+Costs by what the trade did: same day 0.082%, overnight 0.222% long and 0.07%
+short in futures - shorts held overnight only in the 216 names that have them.
+Rs 5 crore a day liquidity throughout. 398 stocks, one year of 15-minute bars.
+
+
+================================================================================
+   ALL SEVENTEEN COMBINATIONS
+================================================================================
+
+  strategy and pair              trades missed    win   risk  COMBINED    1 chart its risk 1st half  2nd half
+  ----------------------------------------------------------------------------------------------------------
+  PATTERNS  DAILY > 15MIN          1708     40%   10.5%   1.12%       -93       -976    6.86%      -473      +278
+  PATTERNS  DAILY > HOURLY         1631     44%   16.6%   1.79%      -107       -937    6.72%      -622      +408
+  PATTERNS  75MIN > 15MIN          8512     51%   17.2%   0.82%      -141       -392    2.82%      -147      -136
+  PATTERNS  HOURLY > 15MIN         9042     55%   17.6%   0.79%      -147       -337    2.53%      -167      -126
+  PATTERNS  WEEKLY > DAILY         1218     54%   24.1%   4.77%      -293     -1,340   16.88%      -241      -345
+  SMC  HOURLY > 15MIN               189     94%   40.2%   0.79%       -62       -142    2.33%        -8      -116
+  SMC  75MIN > 15MIN                170     93%   35.9%   0.74%       -54        -48    2.63%       -87       -21
+  FIB  DAILY > 15MIN               2991     41%   15.3%   1.09%      -195       -293    7.59%      -292      -100
+  FIB  DAILY > HOURLY              2602     47%   25.6%   1.78%      -154       -293    7.59%      -309        -3
+  FIB  HOURLY > 15MIN             15774     51%   25.4%   0.85%      -174       -220    3.15%      -219      -129
+  BREAKOUT20  DAILY > 15MIN         351      7%   11.4%   1.56%      -473       -386    2.91%      -667      -280
+  BREAKOUT20  DAILY > HOURLY        339     10%   18.3%   2.41%      -617       -386    2.91%      -946      -290
+  SETUPS  HOURLY > 15MIN          15195     14%   23.0%   0.88%       -92        -43    1.57%       -75      -109
+  SETUPS  75MIN > 15MIN           12024     10%   21.9%   0.91%       -85        -38    1.70%       -68      -101
+  CANDLES  DAILY > 15MIN          15609      3%   12.2%   1.17%      -235       -281    2.13%      -394       -78
+  CANDLES  DAILY > HOURLY         15929      6%   18.1%   1.78%       -94       -281    2.13%      -446      +257
+  CANDLES  HOURLY > 15MIN        110946     13%   15.0%   0.83%      -139       -138    0.74%      -203       -75
+
+================================================================================
+   NOT ONE OF THEM MAKES MONEY
+================================================================================
+
+Seventeen combinations, six strategies, and the best number in the whole study
+is SMC on a 75-minute chart with 15-minute entries at -Rs 54 a trade. Nothing
+crosses zero.
+
+
+================================================================================
+   THE USEFUL FINDING — WHERE THE IDEA HELPS AND WHERE IT HURTS
+================================================================================
+
+The combination is a STOP-WIDTH fix. That is all it is, and it explains every
+row above.
+
+   WHERE THE ONE-CHART STOP WAS WIDE, it helps enormously:
+
+      chart patterns   stop 6.86% -> 1.12%    -Rs 976 -> -Rs 93
+      Fibonacci        stop 7.59% -> 1.09%    -Rs 293 -> -Rs 195
+      SMC              stop 2.33% -> 0.79%    -Rs 142 -> -Rs 62
+
+   WHERE THE STOP WAS ALREADY TIGHT, it makes things WORSE:
+
+      the four setups  stop 1.57% -> 0.88%     -Rs 43 -> -Rs 92
+      BREAKOUT-20D     stop 2.91% -> 1.56%    -Rs 386 -> -Rs 473
+
+Your four intraday setups already place a sensible stop. Tightening it again
+on the 15-minute chart does not save money, it just gets you stopped out more
+often - the win rate barely moves while the number of small losses climbs.
+
+So the rule to keep is: use the small chart to fix a stop that is too wide.
+Do not use it on a setup whose stop is already where it should be.
+
+That is worth knowing and it is worth what it cost to find out.
+
+
+================================================================================
+   WHAT IT DOES NOT DO
+================================================================================
+
+It does not create an edge. It takes whatever direction the signal gives you
+and lets you bet on it more cheaply. If the direction is worth nothing, a
+cheaper bet on nothing is still worth nothing - it just loses more slowly,
+which is exactly what every row above shows.
+
+The measurement from this morning is the one that matters: with no stop and no
+target at all, just holding, the signals still lose to a random entry in the
+same stock. The problem is upstream of the stop.
+
+ONE ROW WORTH A SECOND LOOK, honestly flagged rather than sold: SMC at
+-Rs 54 and -Rs 62 is the closest anything has come. But 93% of its signals
+never fill - 170 trades out of about 2,800 signals - so the sample is thin,
+and the two halves of the year disagree (-8 then -116 on one pair, -87 then
+-21 on the other). It is not evidence yet. It is a reason to keep recording.
+
+================================================================================

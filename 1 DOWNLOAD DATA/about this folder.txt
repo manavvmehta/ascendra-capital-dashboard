@@ -1,0 +1,48 @@
+================================================================
+  1  DOWNLOAD DATA
+================================================================
+
+WHAT TO DO
+    Double-click:   DOWNLOAD DATA - double click me.py
+
+    A black window opens and starts working. Leave it alone for
+    about an hour.
+
+
+WHAT YOU WILL SEE
+    Step 1   the list of companies          about 1 minute
+    Step 2   ten years of daily prices      about 40 minutes
+    Step 3   extras                         skipped if NSE refuses
+    Step 4   a check that it all arrived    about 1 minute
+
+    During step 2 you will see dates scrolling past and a
+    percentage climbing. As long as that number is going up, it is
+    healthy. It is meant to look slow - there is a deliberate pause
+    between requests so NSE does not cut us off.
+
+
+IF YOU NEED TO STOP
+    Just close the window. Nothing is lost.
+
+    Double-click the file again whenever you like and it carries on
+    from exactly where it stopped. It never downloads the same day
+    twice.
+
+
+IF SOMETHING LOOKS WRONG
+    Take a screenshot of the black window and send it to Claude.
+    Do not try to fix it yourself - some of the warnings that
+    appear are completely normal and only Claude will know which.
+
+
+WHAT APPEARS IN HERE
+    A folder called "nse_data" containing:
+
+        master\        the list of every NSE company
+        bhav\          one file per trading day, ten years of them
+        corpactions\   stock splits and bonus issues, if available
+
+    Do not rename or reorganise anything inside nse_data. The
+    engine looks for those exact names.
+
+================================================================

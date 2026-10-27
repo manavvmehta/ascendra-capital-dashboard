@@ -1,0 +1,203 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Ascendra &mdash; The Engines</title><style>:root{--ground:#0A0D0C;--panel:#101514;--panel2:#151C1A;--line:#202B28;--line2:#2C3A36;
+--ink:#E4EBE8;--ink2:#95A5A0;--ink3:#63736E;--accent:#E9A13B;--accent-dim:#8A6224;
+--long:#3DC98A;--short:#EF5A52;--flat:#7E8F8A;--r1:3px;--r2:6px;
+--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+--cond:'IBM Plex Sans Condensed','IBM Plex Sans',system-ui,sans-serif;
+--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.g{color:var(--long)}.r{color:var(--short)}.f{color:var(--flat)}.a{color:var(--accent)}
+.top{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:14px 20px;background:var(--panel);
+border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.brand{font-family:var(--cond);font-weight:700;font-size:19px;letter-spacing:.14em;text-transform:uppercase}
+.brand em{font-style:normal;color:var(--accent)}
+.desk{font-family:var(--cond);font-size:11px;letter-spacing:.2em;color:var(--ink3);text-transform:uppercase;
+padding-left:12px;border-left:1px solid var(--line2)}
+.sp{flex:1}.pill{font-family:var(--cond);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+padding:4px 9px;border-radius:var(--r1);border:1px solid var(--accent-dim);color:var(--accent);background:#1C1509}
+main{max-width:1120px;margin:0 auto;padding:22px 20px 80px}
+h2{font-family:var(--cond);font-size:14px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink);
+margin:40px 0 4px;padding-bottom:8px;border-bottom:1px solid var(--accent-dim)}
+h2:first-of-type{margin-top:6px}
+h3{font-family:var(--cond);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink2);
+margin:24px 0 8px}
+p{margin:0 0 11px;max-width:900px}.lede{color:var(--ink2);font-size:12.5px}
+table{width:100%;border-collapse:collapse;margin:6px 0 4px}
+th{font-family:var(--cond);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);
+text-align:left;font-weight:600;padding:7px 9px;border-bottom:1px solid var(--line2)}
+td{padding:7px 9px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:top}
+td.l{color:var(--ink2);width:230px;font-family:var(--cond);letter-spacing:.03em}
+tr:hover td{background:var(--panel)}
+.tiles{display:flex;gap:11px;flex-wrap:wrap;margin:10px 0}
+.tile{flex:1 1 185px;border:1px solid var(--line2);border-radius:var(--r2);padding:12px 14px;background:var(--panel)}
+.tile.hero{flex:1 1 100%;background:var(--panel2);border-color:var(--accent-dim)}
+.tn{font-family:var(--cond);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3)}
+.tv{font-size:23px;font-weight:700;margin-top:6px;line-height:1}.tile.hero .tv{font-size:34px}
+.ts{margin-top:6px;font-size:11.5px;color:var(--ink2)}
+.note{background:var(--panel);border:1px solid var(--line2);border-left:2px solid var(--accent-dim);
+border-radius:var(--r1);padding:11px 14px;color:var(--ink2);font-size:12.5px;margin:12px 0}
+.note.bad{border-left-color:var(--short)}
+.tag{font-family:var(--cond);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:1px 6px;
+border-radius:var(--r1);border:1px solid currentColor;white-space:nowrap}
+.v{color:var(--long)}.d{color:var(--accent)}
+.sev{font-family:var(--cond);font-size:9.5px;letter-spacing:.12em;padding:1px 6px;border-radius:var(--r1);
+border:1px solid currentColor;white-space:nowrap}
+code{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:var(--panel2);padding:1px 4px;border-radius:2px}
+ul{margin:4px 0 12px;padding-left:20px;color:var(--ink2)}li{margin:3px 0}</style></head><body>
+<div class=top><span class=brand>ASCENDRA <em>CAPITAL</em></span>
+<span class=desk>THE ENGINES &mdash; REFERENCE</span><span class=sp></span>
+<span class=pill>2026-10-07 10:11</span></div><main>
+
+<p class=lede>Every number on this page carries a label. <span class="tag v">verified</span> means I computed it from your own files today.
+<span class="tag d">documented only</span> means it is a claim written in a docstring or comment that <b>no file on your machine can reproduce</b>
+&mdash; there is no stored backtest result for any of these four engines. Treat the two differently.</p>
+
+<h2>What is running, and where</h2>
+<table><tr><th>Program<th>Serves<th>Writes<th>Schedule<th>Book</tr>
+<tr><td><code>SMC TWO BOOKS.py</code><td class=mono>127.0.0.1:5057
+<td><code>smc2_log.json</code>, <code>smc2_daily.json</code>, and the <code>SMC2</code> block inside the desk page
+<td>sweep on each 15-minute candle boundary; daily book hourly; price every 60s
+<td>SMC short term + SMC long term</tr>
+<tr><td><code>FORMATIONS LIVE.py</code><td class=mono>127.0.0.1:5056
+<td><code>formations_live.json</code>, <code>formations_log.json</code>, <code>formations_daily.json</code>, and the <code>FMLIVE</code> block
+<td>every 120s; full universe every 900s; <b>only</b> Mon&ndash;Fri 09:15&ndash;15:35
+<td>Patterns</tr>
+<tr><td><code>COMMODITIES LIVE.py</code><td class=mono>127.0.0.1:5058
+<td><code>cmd_log.json</code>, <code>cmd_bars.json</code>, and the <code>CMD</code> block
+<td>full check hourly; price every 60s; <b>no market-hours check at all &mdash; runs day and night</b>
+<td>Commodities</tr>
+<tr><td><code>desk.py</code><td class=mono>127.0.0.1:5055<td>rewrites <code>ascendra_desk.html</code> every cycle
+<td>continuous<td>assembles all four tabs</tr></table>
+<div class=note>Each engine writes its own <code>const</code> block directly into the desk HTML, because a page served
+from one port cannot read another. That is why anything you or I write into <code>ascendra_desk.html</code> by hand is
+gone within a minute &mdash; <code>desk.py</code> regenerates the file. Changes must go into <code>desk.py</code>.</div>
+
+<h2>Your position today</h2>
+<div class=tiles>
+<div class="tile hero"><div class=tn>True P&amp;L <span class="tag v">verified</span></div>
+<div class="tv mono r">-&#8377;44,020</div>
+<div class=ts>52 trades that really happened &middot; 16 won &middot; 31% right</div></div>
+</div>
+<div class=tiles>
+<div class=tile><div class=tn>Booked on the desk</div><div class="tv mono r">-&#8377;26,220</div>
+<div class=ts>39 trades, after removing 1 duplicate call</div></div>
+<div class=tile><div class=tn>Filled, never told</div><div class="tv mono r">-&#8377;17,800</div>
+<div class=ts>13 real trades, proven on 15-minute candles</div></div>
+<div class=tile><div class=tn>Patterns</div><div class="tv mono f">&#8377;0</div>
+<div class=ts>0 closed at rated 8+ &middot; 7 open</div></div>
+<div class=tile><div class=tn>Commodities</div><div class="tv mono f">&#8377;0</div>
+<div class=ts>0 calls ever written</div></div>
+</div>
+
+<h2>1 &middot; SMC short term</h2>
+<p class=lede>15-minute chart, cash market, long only, squared off the same day.</p>
+<table>
+<tr><td class=l>The sweep<td>Price runs through <b>yesterday's</b> high or low and closes back the other side inside one 15-minute candle. That candle is the sweep. No candle shape is required &mdash; the shape is named on the card but decides nothing.</tr>
+<tr><td class=l>Stop<td>The sweep candle's low. It must sit 1.5%&ndash;3% below that candle's high, measured on the trigger. Outside the band the call is not written.</tr>
+<tr><td class=l>Trigger<td>Price must then close above the sweep candle's <b>high</b>. That is what says the sweep was real.</tr>
+<tr><td class=l>Entry<td>You do not chase the break. Wait for price to come back into the sweep candle's own <b>body</b> and buy there. Entry = the body low.</tr>
+<tr><td class=l>Target<td>Twice the risk, measured entry to stop.</tr>
+<tr><td class=l>Exit<td>Out if a candle <b>CLOSES</b> below the stop &mdash; not if it merely touches. Otherwise squared off on the 15:15 candle.</tr>
+<tr><td class=l>Fill window<td>Must fill the same day it breaks out, or the call is given up.</tr>
+<tr><td class=l>Cost<td><code>0.059%</code> round trip, intraday cash.</tr>
+<tr><td class=l>New today<td>No call is written from the 15:00 candle onward, and no call may become an order after 15:00. I added this at your instruction; it loads on restart.</tr>
+<tr><td class=l>Tested <span class="tag d">documented only</span><td><b>+&#8377;877 a trade, 1,210 trades, 60% right.</b> Split out-of-sample by stock: +864 one half, +893 the other.</tr>
+<tr><td class=l>Live <span class="tag v">verified</span><td><b>-&#8377;288 a trade, 33 trades, 36% right.</b> Exits: 6 target, 18 stopped, 9 squared off.</tr>
+<tr><td class=l>Where it leaks <span class="tag v">verified</span><td>Average win <b>+1.28R</b> against a 2R target &mdash; only 6 of 12 wins reached the target before the same-day square-off. Average loss <b>-1.26R</b> against a rule that risks 1R; 17 of 21 losses were worse than &minus;1R. Expectancy <b>-0.34R</b> a trade.</tr>
+<tr><td class=l>Call flow <span class="tag v">verified</span><td>223 calls written. 34 filled and closed, 140 thrown away &mdash; 90 never broke out, 31 gave up on the pullback, 19 ran to target without filling.</tr>
+</table>
+
+<h2>2 &middot; SMC long term</h2>
+<p class=lede>Same shape one chart up. Daily candles, held up to ten days, traded as a stock future.</p>
+<table>
+<tr><td class=l>The sweep<td>Price runs through <b>last week's</b> high or low and closes back inside, on a daily candle.</tr>
+<tr><td class=l>Risk band<td>0.3%&ndash;6% &mdash; much wider than the short book's 1.5%&ndash;3%.</tr>
+<tr><td class=l>Entry / target / exit<td>Identical in shape: wait for the break, buy the pullback into the body, target 2&times; risk, out on a <b>close</b> past the stop.</tr>
+<tr><td class=l>Hold<td>Up to 10 trading days, then retired.</tr>
+<tr><td class=l>Must be a future<td>Delivery costs 0.222% the round trip against 0.062% on a future. The file states that &#8377;320 a trade is the difference between this making money and losing it, so F&amp;O names only.</tr>
+<tr><td class=l>Tested <span class="tag d">documented only</span><td><b>+&#8377;1,188 a trade, 5,715 trades, 66% right.</b> Split: +1,071 / +1,322.</tr>
+<tr><td class=l>Live <span class="tag v">verified</span><td><b>-&#8377;2,787 a trade, 6 trades, 17% right.</b> Six trades is too small a sample to conclude anything, but the shape of the losses is not.</tr>
+<tr><td class=l>Where it leaks <span class="tag v">verified</span><td>Average loss <b>-4.52R</b> against a rule that risks 1R. 4 of 5 losses blew past the stop. PGEL: stop &#8377;1.55 away, closed 4.04% down &mdash; <b>&minus;13.4R, &minus;&#8377;8,080 from one trade</b>, half this book's loss. Expectancy <b>-3.44R</b>.</tr>
+<tr><td class=l>Why <span class="tag v">verified</span><td>The stops are inside the noise. Of 101 long-term calls, <b>58 have a stop under 1%</b> (tightest 0.30%, median 0.92%) on a daily chart where these stocks move 2&ndash;2.8% in an ordinary day. On the six closed trades the stop sat at a median of <b>0.23&times; one day's range</b>. Combined with a close-based exit there is no ceiling on the loss.</tr>
+<tr><td class=l>Tested fix <span class="tag v">verified</span><td>A touch-based stop, filled honestly at the open where price gapped past it, turns -&#8377;16,720 into -&#8377;8,203 &mdash; <b>+&#8377;8,517 saved</b> on the same six trades. Four of the five stops gapped, so a touch stop limits the damage but does not cap it at 1R.</tr>
+</table>
+
+<h2>3 &middot; Patterns</h2>
+<p class=lede>Chart formations, rated out of ten. Two pots: POSITIONAL &#8377;4 lakh a slot, SWING &#8377;2 lakh. A paper book &mdash; it places no orders.</p>
+<table>
+<tr><td class=l>Patterns detected<td>Ten: ascending, descending and symmetrical triangle; double bottom and double top; head-and-shoulders and its inverse; cup-and-handle; bull flag and bear flag. Symmetrical triangle is long only.</tr>
+<tr><td class=l>Two sections<td><b>SWING</b> finds the pattern on the <b>daily</b> chart and enters on the <b>hourly</b>. <b>INTRADAY</b> finds it on the <b>hourly</b> and enters on <b>15-minute</b>. The desk renames them: the daily one is your POSITIONAL pot, the hourly one your SWING pot. INTRADAY is F&amp;O names only; any short call is F&amp;O only.</tr>
+<tr><td class=l>Rating out of 10<td>Formation quality from how many of its six criteria it met (max 2) + beating its own industry over 60 days (max 3) + candlesticks confirming (2) + breakout volume (1) + above the 50 EMA (1) + market breadth (1). Two hard vetoes force the rating to <b>0</b>: candles reading a trap, or failing one of the pattern's identity criteria.</tr>
+<tr><td class=l>Entry<td>Not the breakout. Price must come back and <b>retest</b> the pattern line, then close beyond it again; entry is that close. If no retest happens the call sits WAITING at the line.</tr>
+<tr><td class=l>Stop<td>The pattern's own structural stop. On SWING only, widened to 3&times;ATR if that is further away.</tr>
+<tr><td class=l>Cost<td><code>0.222%</code> on SWING (delivery), <code>0.07%</code> on INTRADAY (futures).</tr>
+<tr><td class=l>Floor<td>The desk trades <b>rated 8 and above only</b>.</tr>
+<tr><td class=l>Tested <span class="tag d">documented only</span><td>Positional 8+: <b>938 trades, +&#8377;4,242 each.</b> Swing 8+: <b>797 trades, +&#8377;1,088 each.</b> Split &#8377;40L/&#8377;10L gives <b>21.7% a year</b>; one shared pot gives only 10.5%. The engine's own file adds: rated 9&ndash;10 averaged +1.46% a trade on swing and +0.95% intraday, a rated 8 is +0.39% on swing only, and <b>an INTRADAY 8 lost money.</b></tr>
+<tr><td class=l>Live <span class="tag v">verified</span><td><b>742 calls written. Nothing rated 8 or above has ever closed.</b> 7 are open now. So Patterns has produced no live result at all, for or against. The 238 closed rows are all rated 7 and under &mdash; 45% right at -0.31% a trade, which is roughly what the file says those buckets do, and they are not trades.</tr>
+</table>
+<div class=note bad><b>Two things I found in the code that you should know before trusting the tested figures.</b><br><br>
+<b>1. The live target may not be the tested target.</b> The file keeps a table of per-pattern target fractions
+described as &ldquo;lifted from the backtest, unchanged&rdquo; &mdash; 0.73 of the pattern height for a double bottom,
+0.46 for a flag, and so on. But the function that sets the live target divides the target by that same fraction,
+which reconstructs the <b>full</b> pattern height. So the live book reaches for the whole measured move where the
+table records a fraction of it. If the backtest used the fraction, every live target is 1.4&ndash;2&times; too far away
+and the win rate cannot match. I cannot tell from your files which the backtest used.<br><br>
+<b>2. There is no holding period.</b> No time exit, no maximum hold, no end-of-day square-off anywhere in the file.
+A position closes only on its stop or its target. Anything that hits neither stays open indefinitely.<br><br>
+<b>3. The record was corrupted until 23/09.</b> The file states 165 of 191 rows had been settled from candles that
+printed before the call existed, and says plainly that any average computed from it is fiction. Only calls first
+seen after that fix are worth anything.</div>
+
+<h2>4 &middot; Commodities</h2>
+<p class=lede>Daily candles, long only, four MCX contracts.</p>
+<table>
+<tr><td class=l>Entry rule<td>All of: the day <b>closes above its 20-day high</b> (the highest high of the previous 20 days, strictly greater); <b>TRIX positive</b> (18-period triple EMA of closes); <b>weekly Choppiness under 50</b> (14-week); and a <b>strong breakout candle</b> &mdash; body at least 70% of the day's range and green.</tr>
+<tr><td class=l>Entry price<td>The <b>next day's open</b>. Nothing is assumed &mdash; the call is written with the entry blank and filled in when tomorrow opens. If that open is already below the stop the call is voided, no trade.</tr>
+<tr><td class=l>Stop<td>The 20-day low, fixed at signal time. Never trailed.</tr>
+<tr><td class=l>Target<td>Twice the risk. A gap through either level is honoured at the open, not at the level.</tr>
+<tr><td class=l>Give up<td>After 40 bars held, out at that day's close.</tr>
+<tr><td class=l>Universe<td><b>Four: GOLD (lot 100), SILVER (30), CRUDEOIL (100), COPPER (2500).</b> Cut from sixteen on 28/09 at your request, because the mini and micro contracts are the same commodity in a smaller lot and were producing three calls on one move.</tr>
+<tr><td class=l>Cost<td><code>0.02%</code> round trip.</tr>
+<tr><td class=l>Tested <span class="tag d">documented only</span><td><b>306 signals, 72% reached the target, +8.35% a trade</b>, and +3.03% once the commodity's own rise is taken out. The desk quotes 308 trades at 67% and +7.57%. <b>The file says both &ldquo;three years&rdquo; and &ldquo;five and a half years&rdquo; in different places and does not reconcile them, and all of it was measured on sixteen commodities, not the four you now scan.</b></tr>
+<tr><td class=l>Live <span class="tag v">verified</span><td><b>0 calls. The log is empty.</b> Not a fault: all four are currently below their 20-day high &mdash; copper &minus;1.2%, gold &minus;2.9%, silver &minus;7.2%, crude &minus;15.7%. None has closed above its 20-day high since mid-September. The rule fires roughly once a month per commodity, so on four contracts you should expect about a quarter of the signal count the test was built on.</tr>
+</table>
+<div class=note><b>Three code-level notes.</b> The lot size is written into every call and then never read &mdash; all money
+is flat &#8377;2 lakh notional regardless of lot, so a single GOLD lot's real cost is not checked against the slot.
+The weekly Choppiness index is read one week further back than the code's own comment describes. And there is no
+market-hours, weekday or holiday check anywhere &mdash; the program scans and quotes continuously, including nights
+and weekends.</div>
+
+<h2>What is deliberately off the desk</h2>
+<p class=lede>Their absence is correct and is never a fault.</p>
+<ul>
+<li><b>Jenil's engine</b> (<code>3 CALL ENGINE/tech_calls.py</code>) &mdash; the old intraday+swing BREAKOUT-20D engine. Stopped feeding your book on 28/09. <code>DATA/backtest.json</code> belongs to <b>this</b> engine, not to Patterns: 4,334 signals over three years, 32.7% right, &minus;210R. It is the only machine-generated backtest file on your machine and it describes a retired engine. I mistook it for Patterns earlier today and told you your strategy loses money. That was wrong.</li>
+<li><b>SP engine</b> &mdash; off the desk. <code>sp_log.csv</code>, <code>sp_history.csv</code>.</li>
+<li><b>The old SMC engine</b> &mdash; off the desk. Its own file states it loses about &#8377;180 a trade over 176,483 sweeps. <code>smc_log.csv</code>, <code>smc_bars.json</code>.</li>
+</ul>
+
+<h2>Faults open right now, worst first</h2>
+<table><tr><th>Engine<th>Fault<th>Cost<th>Severity</tr>
+<tr><td>SMC long term<td>Stops as tight as 0.30% on a daily chart; 58 of 101 calls under 1%. Close-based exit puts no ceiling on the loss.<td class="mono r">-&#8377;8,517 on 6 trades<td><span class="sev r">worst</span></tr>
+<tr><td>Patterns<td>Live target appears to be the full pattern height where the backtest table holds a fraction. Nothing has closed at a tradeable rating, so there is no live evidence either way.<td>unknown<td><span class="sev r">unknown, possibly large</span></tr>
+<tr><td>SMC short term<td>Winners cut by the same-day square-off (avg +1.28R vs a 2R target) while losses run to -1.26R.<td class="mono r">expectancy -0.34R<td><span class="sev a">high</span></tr>
+<tr><td>Both SMC books<td>Duplicate call on one stock still counted twice in the desk headline (CEMPRO, 01/10).<td class="mono r">-&#8377;3,920<td><span class="sev a">medium</span></tr>
+<tr><td>Patterns<td>No holding period at all &mdash; a position that hits neither stop nor target stays open forever.<td>unquantified<td><span class="sev a">medium</span></tr>
+<tr><td>Commodities<td>No market-hours check; runs nights and weekends. Lot size recorded but never used in sizing.<td>none yet<td><span class="sev f">low</span></tr>
+<tr><td>Desk<td>&ldquo;COULD NOT TAKE &mdash; no capital free&rdquo; shown over rows whose real reason is the target had already gone. Bell badge stuck at 40 (history cap, not an unread count).<td>cosmetic<td><span class="sev f">low</span></tr></table>
+
+<h2>The one thing missing from all of this</h2>
+<p>There is <b>no stored backtest result for any of the four engines you trade.</b> Every tested figure on this page
+is text in a docstring. <code>DATA/backtest.json</code> is the only machine-generated one and it belongs to a retired
+engine. That is why I could not tell you today whether your strategy makes money.</p>
+<p>You now have <code>DATA/smc2_15m.json</code> &mdash; real 15-minute candles, the first intraday history ever saved
+on this machine. Running each engine's own code over its own stored bars, and writing the result to a file, is the
+only thing that turns these documented claims into verified ones. Until that exists, every &ldquo;tested&rdquo; number
+above is an assertion.</p>
+
+<div class=note>Built 2026-10-07 10:11 from <code>smc2_log.json</code>, <code>smc2_settled.json</code>,
+<code>smc2_15m.json</code>, <code>formations_log.json</code>, <code>cmd_log.json</code>, <code>cmd_bars.json</code>,
+<code>backtest.json</code> and the source of all four engines. Separate file &mdash; it does not touch your desk.</div>
+</main></body></html>

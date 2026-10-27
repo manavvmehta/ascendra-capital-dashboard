@@ -1,0 +1,108 @@
+================================================================================
+
+                     A S C E N D R A   C A P I T A L
+
+                        Updated 2 September 2026
+
+================================================================================
+
+
+  THE ONLY FILE YOU OPEN
+  ----------------------
+
+        5 LIVE FEED  ->  ASCENDRA.py
+
+  Double-click it. It shows where things stand and asks what you want to do.
+  Everything else is run from its menu.
+
+
+  YOUR DAILY ROUTINE
+  ------------------
+
+  Before 9:15       open ASCENDRA.py, press 1  (log in to Zerodha)
+                    then press 2               (start the desk)
+
+  Leave that window open all day. It IS the engine. Close it and open calls
+  stop being watched - and a stop nobody is watching is not a stop.
+
+  Your dashboard is at http://localhost:5055 and refreshes itself.
+
+  After the close   press 3 if you want tonight's swing calls written up.
+
+
+  WHAT THE MENU DOES
+  ------------------
+
+  1  LOG IN TO ZERODHA
+     Twenty seconds. Zerodha's access expires at the end of every day - that
+     is their rule, and every system built on Kite does this same login.
+
+  2  START THE DESK
+     Runs the call engine against live prices and serves your website.
+     Scans the whole market every 150 seconds; re-checks any open call every
+     5 seconds.
+
+  3  SCAN NOW
+     After the close. Runs the swing setup over the day's final prices and
+     writes any calls it finds, with entry, stop and both targets.
+
+  4  BACKTEST
+     One-off, about twenty minutes. Replays the same rules over three years
+     of real prices and reports what they would actually have made or lost.
+     Results appear on the BACKTEST tab of your dashboard.
+
+
+  THE FOLDERS
+  -----------
+
+  5 LIVE FEED     everything you run, plus your Zerodha keys.
+                  KEEP kite_keys.txt PRIVATE - anyone holding your API
+                  secret can act on your trading account.
+
+  3 CALL ENGINE   the engine itself, written by Jenil. The five setups, the
+                  scoring, the lifecycle of a call. HOW_IT_WORKS.txt in there
+                  explains every rule in plain English - worth reading, since
+                  it is what you are trusting with money.
+
+  WEBSITE         the dashboard page the desk serves.
+
+  DATA            everything the system has produced. calls_log.csv is your
+                  permanent record and survives restarts - that file is the
+                  reason you will eventually know whether this works.
+
+  1 DOWNLOAD DATA  NOT CURRENTLY USED. Ten years of NSE end-of-day prices,
+                  from before the Zerodha feed existed. Kite now supplies
+                  everything the engine needs. Kept only because it includes
+                  companies that have since delisted, which Kite does not -
+                  that matters for an honest long backtest one day. Safe to
+                  delete if you want the disk space back.
+
+  2 ENGINE        PARKED. The inverted head-and-shoulders work, from before
+  4 REFERENCE     we changed direction. Nothing runs it. Kept in case you
+                  come back to that pattern.
+
+
+  WHAT IS TRUE AND WHAT IS NOT, RIGHT NOW
+  ---------------------------------------
+
+  WORKING     live Zerodha feed · engine scanning ~2,300 stocks · website ·
+              permanent call record · three-year backtest
+
+  NOT DONE    market cap filter (no source for the numbers yet)
+              F&O futures as tradeable instruments (F&O STOCKS are already
+              scanned, because they are NSE equities)
+
+  UNPROVEN    whether any of it makes money. That is what the backtest and
+              the growing call record are for. Jenil's own dashboard shows
+              live results running BELOW his backtest - worth remembering
+              before trusting a good-looking number.
+
+
+  IF SOMETHING BREAKS
+  -------------------
+
+  Screenshot the black window and send it to Claude. Do not try to fix it -
+  several of the warnings that appear are completely normal, and only the
+  full text says which.
+
+================================================================================

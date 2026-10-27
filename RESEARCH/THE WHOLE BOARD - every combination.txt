@@ -1,0 +1,425 @@
+================================================================================
+   THE WHOLE BOARD
+   every candlestick x every level x every indicator, on five timeframes
+   15/09/2026,  ASCENDRA CAPITAL
+================================================================================
+
+MM: "why are you just choosing hammer, engulfing and shooting star. there are
+other reversal candles as well ... why just bollinger bands, if there is any
+other indicator which we can club then we can backtest that as well. lets not
+put any limits to our work."
+
+Fair. The first confluence test used three candles, four levels and one
+indicator. This is everything.
+
+   37 CANDLES     hammer, inverted hammer, hanging man, shooting star, the
+                  four dojis, marubozu, spinning top, belt hold, engulfing,
+                  piercing line, dark cloud cover, harami, harami cross,
+                  tweezers, kicking, morning and evening star, doji star,
+                  abandoned baby, three white soldiers, three black crows,
+                  three inside and outside up and down
+
+   12 LEVELS      Bollinger, Keltner, EMA 20 / 50 / 200, VWAP, range extreme,
+                  twice-rejected zone, floor pivots S1-R1 and S2-R2, previous
+                  day's high and low, Donchian
+
+   14 INDICATORS  RSI, Stochastic, StochRSI, Williams %R, CCI, MFI,
+                  Bollinger %B, DeMarker, Ultimate Oscillator, ROC, MACD
+                  histogram, RSI divergence, RSI-50 cross, and none-at-all
+
+   5 TIMEFRAMES   15-minute, 30-minute, hourly, 75-minute, daily
+
+That is 6,216 combinations on each timeframe, about 31,000 in all, over
+roughly nine million signals.
+
+
+================================================================================
+   HOW IT WAS JUDGED, AND WHY THIS PART IS THE WHOLE POINT
+================================================================================
+
+At 31,000 tests, roughly 1,550 will look good at p<0.05 from luck alone. Any
+"best combination" picked out of a table that size is meaningless. So the
+sweep was run one way only:
+
+    CHOOSE on the FIRST half of the data.
+    JUDGE on the SECOND half, which the choosing never saw.
+
+If the winners are real, far more than half of them should win again in the
+second half. If they are noise, about half will - that is what a coin does.
+
+
+================================================================================
+   THE RESULT
+================================================================================
+
+   timeframe   combinations   won 1st half   ALSO won 2nd   luck would give
+   ----------------------------------------------------------------------
+   15-minute          3,181            746            118              373
+   30-minute          2,548          1,282            366              641
+   hourly             1,956          1,253            347              626
+   75-minute          1,643            698            183              349
+   daily                 --            276            120              138
+
+Read the last two columns. On every single timeframe, FEWER combinations
+survived than luck alone would have produced.
+
+That is not a near miss. It means a combination that made money in the first
+half was LESS likely than a coin toss to make money in the second. Picking the
+winners from a backtest was actively worse than picking at random.
+
+This is the cleanest answer the project has produced, and it covers everything
+MM asked for in one test: all the candles, all the levels, all the indicators,
+every timeframe. None of it holds up.
+
+
+================================================================================
+   WHAT THE SURVIVORS ACTUALLY ARE — and it is not what we were looking for
+================================================================================
+
+The rows that did survive are mostly not reversal setups at all:
+
+   hourly     bullish engulfing, bullish belt hold, bullish marubozu,
+              three outside up, three white soldiers
+   30-minute  the same list
+   15-minute  bullish marubozu, belt hold, three outside up, three white
+              soldiers
+
+Forty-odd percent of every survivor list is a BUYING-STRENGTH candle - a big
+green bar, a run of green bars - and almost all of them are long. Those are
+not "price reversed at a level". They are momentum, in a year the market rose.
+
+Which lands in the same place as the only other thing that has ever tested
+positive here: momentum, where the top tenth of twelve-month winners beat the
+market by Rs 385 a month. The chart is not finding turns. Where it appears to
+find anything, it is finding strength - and there is a far simpler and better
+tested way to buy strength than waiting for a marubozu at a pivot.
+
+
+================================================================================
+   AND THE CONFLUENCE RESULT FROM EARLIER
+================================================================================
+
+The Bollinger + reversal candle + RSI row that came out at +Rs 135 was one of
+the 1,253 hourly combinations that looked good on the first half, and one of
+the 347 that also looked good on the second. Out of 1,253, about 626 were
+going to do that by chance. It was not special; it was one of the expected
+ones - and its own control test said the same thing separately: it beat a
+random BAR but not a random STOCK on the same hour.
+
+================================================================================
+
+
+========================================================================================================
+  THE WHOLE BOARD — HOURLY
+  every candle x every level x every indicator, chosen on the first half
+  of the year and judged on the second, which the choosing never saw
+========================================================================================================
+  1,182,704 signals · 1,956 combinations with enough trades in both halves
+  1,253 made money in the FIRST half — the ones a normal
+  backtest would have picked.
+  347 of those also made money in the SECOND half.
+  Pure luck would give about 626. THAT IS NOT BETTER THAN LUCK.
+
+  THE ONES THAT WON IN BOTH HALVES, worst-half first
+  candle                  level       indicator        trades   1st half   2nd half  win 2nd
+  ----------------------------------------------------------------------------------------------------
+  BULLISH-MARUBOZU        PIVOT-S1R1  RSI50               260       +725       +651    46.2%
+  BULLISH-MARUBOZU        VWAP        CCI                 407       +735       +554    43.8%
+  BULLISH-BELT-HOLD       RANGE       PCTB                409       +633       +520    48.9%
+  BULLISH-MARUBOZU        KELTNER     ROC                 286       +473       +546    44.2%
+  BULLISH-MARUBOZU        VWAP        STOCH               378       +604       +460    41.6%
+  THREE-WHITE-SOLDIERS    ZONE        CCI                 390       +454       +621    50.7%
+  BULLISH-ENGULFING       PIVOT-S1R1  ROC                 364       +453       +540    45.3%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  RSI-DIVERGENCE      292       +422       +361    47.1%
+  THREE-WHITE-SOLDIERS    PIVOT-S1R1  NONE                408     +1,008       +352    41.7%
+  BULLISH-MARUBOZU        PIVOT-S1R1  NONE                727       +395       +346    41.7%
+  BULLISH-BELT-HOLD       KELTNER     ULTOSC              341       +912       +327    41.1%
+  BULLISH-BELT-HOLD       KELTNER     STOCHRSI           1313       +322       +325    42.6%
+  BULLISH-MARUBOZU        ZONE        PCTB                478       +425       +321    44.8%
+  BULLISH-HARAMI          KELTNER     RSI-DIVERGENCE     1852       +353       +320    41.3%
+  BULLISH-BELT-HOLD       KELTNER     PCTB                828       +509       +313    45.2%
+  BULLISH-MARUBOZU        BB          PCTB                593       +309       +333    43.2%
+  BULLISH-BELT-HOLD       BB          PCTB               1296       +341       +295    42.9%
+  BULLISH-MARUBOZU        KELTNER     STOCHRSI            717       +294       +328    42.2%
+  BULLISH-BELT-HOLD       RANGE       STOCHRSI            728       +327       +293    41.4%
+  BULLISH-MARUBOZU        EMA200      NONE                329       +269       +477    44.1%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  RSI50               369       +265       +385    41.9%
+  BULLISH-HARAMI          PIVOT-S2R2  RSI-DIVERGENCE      449       +426       +262    39.9%
+  BULLISH-ENGULFING       RANGE       MFI                 443       +262       +385    45.2%
+  MORNING-STAR            ZONE        MFI                 460       +259       +652    50.8%
+  TWEEZER-BOTTOM          KELTNER     RSI-DIVERGENCE      688       +356       +259    40.8%
+  BULLISH-MARUBOZU        VWAP        RSI50               769       +259       +466    42.7%
+  BULLISH-MARUBOZU        VWAP        MACD-HIST           445       +253       +414    41.9%
+  BULLISH-BELT-HOLD       BB          STOCHRSI           1059       +244       +280    41.2%
+  MORNING-STAR            ZONE        ULTOSC              372       +239       +238    42.1%
+  BULLISH-MARUBOZU        PIVOT-S1R1  STOCHRSI            400       +237       +320    40.8%
+  BULLISH-MARUBOZU        VWAP        WILLIAMS            380       +644       +237    36.5%
+  BULLISH-MARUBOZU        PIVOT-S2R2  NONE                324       +528       +234    41.5%
+  MORNING-DOJI-STAR       PIVOT-S1R1  NONE                302       +232       +344    39.5%
+  BULLISH-MARUBOZU        ZONE        CCI                1103       +233       +226    41.7%
+  DOJI                    PREVDAY     DEMARKER            353       +253       +225    39.6%
+  TWEEZER-BOTTOM          ZONE        MFI                 329       +224       +248    44.2%
+  HAMMER                  BB          STOCHRSI            498       +222       +264    38.9%
+  TWEEZER-BOTTOM          BB          ROC                 449       +218       +401    46.0%
+  BULLISH-BELT-HOLD       KELTNER     ROC                 522       +217       +254    40.4%
+  MORNING-DOJI-STAR       KELTNER     STOCHRSI            260       +213       +260    43.3%
+    ... and 307 more
+
+  READ THIS BEFORE ACTING ON ANY ROW ABOVE.
+  1,253 combinations looked good on the first half. If every
+  one of them were worthless, roughly half would still look good on the
+  second half by chance — about 626 rows. This table has 347.
+  A row is only interesting if the whole table is bigger than luck
+  predicts, and even then the individual row still needs live proof.
+
+========================================================================================================
+  THE WHOLE BOARD — 75MIN
+  every candle x every level x every indicator, chosen on the first half
+  of the year and judged on the second, which the choosing never saw
+========================================================================================================
+  825,549 signals · 1,643 combinations with enough trades in both halves
+  698 made money in the FIRST half — the ones a normal
+  backtest would have picked.
+  183 of those also made money in the SECOND half.
+  Pure luck would give about 349. THAT IS NOT BETTER THAN LUCK.
+
+  THE ONES THAT WON IN BOTH HALVES, worst-half first
+  candle                  level       indicator        trades   1st half   2nd half  win 2nd
+  ----------------------------------------------------------------------------------------------------
+  BULLISH-MARUBOZU        VWAP        CCI                 336       +363       +438    43.8%
+  THREE-WHITE-SOLDIERS    EMA50       NONE                511       +571       +354    43.9%
+  MORNING-STAR            EMA50       RSI50               349       +349       +439    41.1%
+  THREE-OUTSIDE-UP        VWAP        CCI                 583       +395       +341    42.5%
+  BULLISH-MARUBOZU        VWAP        RSI-DIVERGENCE      411       +560       +337    41.8%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  RSI50               275       +603       +329    41.1%
+  HAMMER                  BB          RSI-DIVERGENCE      681       +323       +389    39.4%
+  BEARISH-BELT-HOLD       KELTNER     STOCH               404       +411       +323    47.0%
+  EVENING-STAR            ZONE        MFI                 313       +473       +323    40.4%
+  BULLISH-ENGULFING       EMA50       RSI-DIVERGENCE      439       +402       +321    39.6%
+  BULLISH-KICKING         VWAP        STOCHRSI            292       +296       +363    42.1%
+  BULLISH-MARUBOZU        ZONE        RSI-DIVERGENCE      764       +349       +287    40.6%
+  EVENING-STAR            DONCHIAN    WILLIAMS            275       +590       +286    41.4%
+  SPINNING-TOP            DONCHIAN    RSI                 313       +283       +381    42.6%
+  BEARISH-KICKING         VWAP        RSI50               439       +402       +260    41.1%
+  BULLISH-HARAMI          DONCHIAN    RSI-DIVERGENCE      638       +259       +381    41.8%
+  BULLISH-MARUBOZU        PREVDAY     STOCHRSI            298       +249       +446    45.6%
+  THREE-OUTSIDE-DOWN      ZONE        MFI                 393       +488       +248    41.8%
+  BULLISH-HARAMI          KELTNER     RSI-DIVERGENCE     1138       +329       +243    40.0%
+  HAMMER                  KELTNER     RSI-DIVERGENCE      619       +242       +322    40.3%
+  HAMMER                  KELTNER     STOCHRSI            315       +315       +232    40.8%
+  SPINNING-TOP            EMA50       STOCHRSI            368       +223       +238    39.7%
+  THREE-OUTSIDE-UP        VWAP        STOCHRSI           1030       +216       +417    40.0%
+  DOJI                    PREVDAY     ROC                 317       +739       +209    39.1%
+  BULLISH-ENGULFING       BB          RSI-DIVERGENCE      562       +209       +290    41.7%
+  THREE-WHITE-SOLDIERS    PREVDAY     NONE                252       +971       +208    41.7%
+  BULLISH-ENGULFING       PIVOT-S1R1  ROC                 421       +199       +369    39.6%
+  BULLISH-HARAMI          BB          RSI-DIVERGENCE     1201       +327       +192    38.8%
+  BULLISH-MARUBOZU        PREVDAY     NONE                592       +192       +229    41.4%
+  BEARISH-HARAMI          PIVOT-S1R1  PCTB                432       +193       +190    42.2%
+  BULLISH-ENGULFING       PIVOT-S1R1  RSI-DIVERGENCE      661       +210       +188    36.5%
+  TWEEZER-BOTTOM          BB          ULTOSC              259       +340       +188    35.0%
+  MORNING-DOJI-STAR       ZONE        STOCHRSI            488       +204       +177    39.2%
+  SPINNING-TOP            EMA50       WILLIAMS            324       +295       +176    38.5%
+  MORNING-STAR            VWAP        STOCHRSI            799       +167       +392    40.9%
+  BULLISH-HARAMI          KELTNER     ULTOSC              716       +166       +302    40.5%
+  TWEEZER-BOTTOM          BB          RSI-DIVERGENCE      424       +165       +355    41.8%
+  BULLISH-MARUBOZU        PIVOT-S1R1  NONE                516       +490       +164    38.6%
+  THREE-OUTSIDE-UP        VWAP        STOCH               387       +295       +161    37.8%
+  BULLISH-MARUBOZU        VWAP        NONE               2158       +161       +351    42.0%
+    ... and 143 more
+
+  READ THIS BEFORE ACTING ON ANY ROW ABOVE.
+  698 combinations looked good on the first half. If every
+  one of them were worthless, roughly half would still look good on the
+  second half by chance — about 349 rows. This table has 183.
+  A row is only interesting if the whole table is bigger than luck
+  predicts, and even then the individual row still needs live proof.
+
+========================================================================================================
+  THE WHOLE BOARD — 30MIN
+  every candle x every level x every indicator, chosen on the first half
+  of the year and judged on the second, which the choosing never saw
+========================================================================================================
+  2,278,687 signals · 2,548 combinations with enough trades in both halves
+  1,282 made money in the FIRST half — the ones a normal
+  backtest would have picked.
+  366 of those also made money in the SECOND half.
+  Pure luck would give about 641. THAT IS NOT BETTER THAN LUCK.
+
+  THE ONES THAT WON IN BOTH HALVES, worst-half first
+  candle                  level       indicator        trades   1st half   2nd half  win 2nd
+  ----------------------------------------------------------------------------------------------------
+  BULLISH-ENGULFING       VWAP        ROC                 290       +554       +582    52.5%
+  BULLISH-ENGULFING       PIVOT-S2R2  ROC                 273       +366       +471    48.8%
+  BULLISH-KICKING         BB          ROC                 277       +354       +351    44.4%
+  BULLISH-MARUBOZU        RANGE       STOCHRSI            506       +363       +294    43.8%
+  BULLISH-MARUBOZU        KELTNER     ROC                 467       +399       +278    44.8%
+  BULLISH-MARUBOZU        KELTNER     RSI                1112       +271       +287    45.4%
+  BULLISH-BELT-HOLD       RANGE       ROC                 417       +256       +326    46.1%
+  BULLISH-BELT-HOLD       RANGE       DEMARKER            420       +253       +260    45.0%
+  BULLISH-ENGULFING       ZONE        ROC                2347       +246       +269    44.9%
+  BULLISH-MARUBOZU        VWAP        STOCH               432       +239       +352    44.3%
+  THREE-OUTSIDE-UP        RANGE       ULTOSC              378       +300       +235    42.0%
+  BULLISH-MARUBOZU        KELTNER     CCI                 746       +229       +327    43.4%
+  THREE-WHITE-SOLDIERS    EMA20       MACD-HIST           481       +247       +223    42.7%
+  BULLISH-ENGULFING       PIVOT-S2R2  DEMARKER            356       +223       +276    46.7%
+  BULLISH-MARUBOZU        RANGE       RSI                 347       +558       +222    44.2%
+  BULLISH-MARUBOZU        KELTNER     MFI                 332       +247       +217    42.1%
+  THREE-WHITE-SOLDIERS    ZONE        RSI50              2293       +206       +199    43.0%
+  THREE-OUTSIDE-UP        RANGE       MFI                 295       +212       +193    45.1%
+  THREE-WHITE-SOLDIERS    VWAP        RSI50               672       +186       +260    42.6%
+  BULLISH-MARUBOZU        PIVOT-S2R2  WILLIAMS            260       +184       +360    47.5%
+  BULLISH-KICKING         ZONE        ROC                 686       +299       +183    42.4%
+  BEARISH-ENGULFING       PIVOT-S2R2  DEMARKER            272       +183       +240    44.7%
+  BULLISH-ENGULFING       KELTNER     ROC                1889       +174       +211    43.2%
+  BULLISH-MARUBOZU        KELTNER     ULTOSC              385       +168       +431    47.5%
+  BULLISH-ENGULFING       PIVOT-S1R1  RSI                 500       +232       +167    42.3%
+  TWEEZER-BOTTOM          ZONE        ROC                1194       +284       +166    39.6%
+  BULLISH-ENGULFING       VWAP        STOCH               654       +158       +237    41.2%
+  BEARISH-BELT-HOLD       VWAP        PCTB                270       +157       +298    46.9%
+  BULLISH-MARUBOZU        VWAP        WILLIAMS            308       +155       +506    49.7%
+  BULLISH-KICKING         KELTNER     ROC                 555       +272       +155    42.1%
+  BULLISH-ENGULFING       BB          ROC                 900       +154       +329    45.0%
+  TWEEZER-BOTTOM          RANGE       MFI                 473       +152       +186    43.5%
+  BULLISH-MARUBOZU        ZONE        MFI                 547       +152       +155    43.7%
+  BULLISH-MARUBOZU        RANGE       NONE                901       +148       +221    42.9%
+  BEARISH-KICKING         BB          ROC                 320       +222       +146    43.6%
+  THREE-OUTSIDE-UP        KELTNER     ULTOSC              823       +145       +195    43.1%
+  HAMMER                  KELTNER     STOCH               795       +140       +175    43.9%
+  BULLISH-BELT-HOLD       PREVDAY     MACD-HIST           427       +139       +158    43.7%
+  BULLISH-HARAMI          DONCHIAN    STOCH               286       +158       +139    38.5%
+  BULLISH-MARUBOZU        ZONE        ROC                 594       +481       +136    41.7%
+    ... and 326 more
+
+  READ THIS BEFORE ACTING ON ANY ROW ABOVE.
+  1,282 combinations looked good on the first half. If every
+  one of them were worthless, roughly half would still look good on the
+  second half by chance — about 641 rows. This table has 366.
+  A row is only interesting if the whole table is bigger than luck
+  predicts, and even then the individual row still needs live proof.
+
+========================================================================================================
+  THE WHOLE BOARD — 15MIN
+  every candle x every level x every indicator, chosen on the first half
+  of the year and judged on the second, which the choosing never saw
+========================================================================================================
+  4,403,509 signals · 3,181 combinations with enough trades in both halves
+  746 made money in the FIRST half — the ones a normal
+  backtest would have picked.
+  118 of those also made money in the SECOND half.
+  Pure luck would give about 373. THAT IS NOT BETTER THAN LUCK.
+
+  THE ONES THAT WON IN BOTH HALVES, worst-half first
+  candle                  level       indicator        trades   1st half   2nd half  win 2nd
+  ----------------------------------------------------------------------------------------------------
+  BULLISH-ENGULFING       VWAP        RSI                 360       +418       +387    54.0%
+  HAMMER                  ZONE        ROC                 584       +238       +273    46.0%
+  DRAGONFLY-DOJI          ZONE        ROC                 266       +197       +316    45.9%
+  HAMMER                  KELTNER     ROC                 502       +175       +298    46.3%
+  BEARISH-BELT-HOLD       PIVOT-S2R2  CCI                 418       +153       +141    43.4%
+  INVERTED-HAMMER         RANGE       ROC                 370       +118       +132    42.2%
+  THREE-WHITE-SOLDIERS    PIVOT-S2R2  NONE                383       +107       +153    46.0%
+  BEARISH-HARAMI-CROSS    ZONE        ULTOSC              422       +103       +177    45.1%
+  THREE-BLACK-CROWS       EMA200      MACD-HIST           247       +168        +97    43.8%
+  THREE-WHITE-SOLDIERS    VWAP        STOCH               571       +215        +97    41.9%
+  THREE-OUTSIDE-UP        PREVDAY     MFI                 262       +121        +94    44.2%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  DEMARKER            729        +91       +115    42.4%
+  THREE-BLACK-CROWS       EMA200      RSI-DIVERGENCE      410       +123        +91    40.7%
+  THREE-WHITE-SOLDIERS    ZONE        STOCH              2476        +89       +151    44.5%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  MFI                 279        +84       +177    45.9%
+  BULLISH-BELT-HOLD       RANGE       ROC                 440        +84       +115    43.0%
+  BEARISH-BELT-HOLD       EMA200      MACD-HIST           515        +92        +82    42.0%
+  HAMMER                  RANGE       ROC                 391       +153        +77    41.9%
+  TWEEZER-BOTTOM          PIVOT-S1R1  RSI                 400        +77       +103    42.7%
+  HAMMER                  KELTNER     MACD-HIST           461        +71        +96    40.0%
+  THREE-OUTSIDE-UP        EMA200      RSI-DIVERGENCE      435        +67        +66    37.6%
+  BULLISH-MARUBOZU        ZONE        ROC                 526        +66       +513    52.3%
+  BULLISH-ENGULFING       PIVOT-S2R2  ULTOSC              323        +65       +144    43.6%
+  HANGING-MAN             VWAP        MFI                 388        +75        +64    41.6%
+  BEARISH-HARAMI-CROSS    ZONE        RSI50               368        +94        +63    41.2%
+  BULLISH-MARUBOZU        PREVDAY     MACD-HIST           371        +73        +61    40.0%
+  BULLISH-ENGULFING       RANGE       ROC                 876        +59       +201    44.2%
+  INVERTED-HAMMER         KELTNER     ROC                 376        +63        +59    40.4%
+  BULLISH-HARAMI          RANGE       ROC                1416        +58       +173    43.7%
+  BULLISH-KICKING         ZONE        ULTOSC             1120        +79        +52    41.5%
+  THREE-OUTSIDE-UP        RANGE       ULTOSC              615        +52       +129    41.5%
+  TWEEZER-BOTTOM          RANGE       ROC                 638        +82        +51    40.2%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  STOCH               737        +55        +51    38.0%
+  BULLISH-KICKING         PIVOT-S2R2  WILLIAMS            341        +58        +50    41.9%
+  DOJI                    DONCHIAN    RSI                 442        +49       +110    38.8%
+  LONG-LEGGED-DOJI        PIVOT-S1R1  MACD-HIST           364        +48       +130    45.9%
+  DRAGONFLY-DOJI          BB          STOCHRSI            410        +46       +201    42.7%
+  BULLISH-BELT-HOLD       PIVOT-S1R1  RSI-DIVERGENCE      980        +48        +46    40.2%
+  DRAGONFLY-DOJI          KELTNER     STOCHRSI            438        +45       +180    40.8%
+  SHOOTING-STAR           EMA50       STOCHRSI            294        +45        +65    38.7%
+    ... and 78 more
+
+  READ THIS BEFORE ACTING ON ANY ROW ABOVE.
+  746 combinations looked good on the first half. If every
+  one of them were worthless, roughly half would still look good on the
+  second half by chance — about 373 rows. This table has 118.
+  A row is only interesting if the whole table is bigger than luck
+  predicts, and even then the individual row still needs live proof.
+
+========================================================================================================
+  THE WHOLE BOARD — DAILY
+  every candle x every level x every indicator, chosen on the first half
+  of the year and judged on the second, which the choosing never saw
+========================================================================================================
+  1,180,457 signals · 2,013 combinations with enough trades in both halves
+  277 made money in the FIRST half — the ones a normal
+  backtest would have picked.
+  120 of those also made money in the SECOND half.
+  Pure luck would give about 138. THAT IS NOT BETTER THAN LUCK.
+
+  THE ONES THAT WON IN BOTH HALVES, worst-half first
+  candle                  level       indicator        trades   1st half   2nd half  win 2nd
+  ----------------------------------------------------------------------------------------------------
+  HAMMER                  KELTNER     STOCHRSI            270     +3,002     +2,601    46.9%
+  HAMMER                  ZONE        CCI                 286     +2,366     +1,723    48.3%
+  HAMMER                  BB          STOCHRSI            368     +2,799     +1,678    43.6%
+  HAMMER                  BB          PCTB                494     +2,409     +1,487    40.8%
+  HAMMER                  ZONE        PCTB                290     +3,189     +1,409    39.7%
+  HAMMER                  KELTNER     PCTB                378     +2,743     +1,383    40.4%
+  HAMMER                  DONCHIAN    PCTB                314     +1,354     +1,200    41.8%
+  HAMMER                  VWAP        STOCHRSI            276     +2,057     +1,200    41.8%
+  BULLISH-MARUBOZU        VWAP        STOCHRSI            459     +1,365       +912    38.8%
+  BEARISH-BELT-HOLD       EMA20       STOCHRSI            814       +887       +977    46.4%
+  HAMMER                  ZONE        STOCHRSI            588     +2,629       +779    41.4%
+  EVENING-DOJI-STAR       PIVOT-S2R2  NONE                313     +1,059       +776    48.6%
+  HAMMER                  ZONE        ROC                 577       +676     +1,192    42.4%
+  BEARISH-MARUBOZU        VWAP        RSI50               667       +664       +946    50.1%
+  GRAVESTONE-DOJI         EMA20       RSI-DIVERGENCE      345       +978       +659    50.3%
+  THREE-OUTSIDE-UP        VWAP        PCTB                472       +657       +840    38.0%
+  HAMMER                  KELTNER     WILLIAMS            615       +638     +1,036    42.3%
+  DARK-CLOUD-COVER        PIVOT-S1R1  WILLIAMS            416       +621       +841    47.0%
+  DARK-CLOUD-COVER        ZONE        STOCHRSI            380       +608       +603    45.4%
+  BULLISH-MARUBOZU        VWAP        WILLIAMS            348       +594     +1,682    42.8%
+  BEARISH-HARAMI          EMA20       STOCHRSI            331     +1,729       +566    46.2%
+  TWEEZER-TOP             ZONE        RSI                 283     +1,117       +539    48.0%
+  BEARISH-BELT-HOLD       EMA50       RSI-DIVERGENCE      646       +522       +796    47.4%
+  HAMMER                  BB          NONE               3101       +815       +479    38.6%
+  BEARISH-ENGULFING       PIVOT-S2R2  MACD-HIST           329       +455       +618    48.3%
+  THREE-INSIDE-UP         ZONE        ROC                 335       +971       +438    37.7%
+  HAMMER                  RANGE       WILLIAMS            518       +432       +557    37.8%
+  DARK-CLOUD-COVER        PREVDAY     WILLIAMS            292       +552       +415    43.3%
+  DARK-CLOUD-COVER        DONCHIAN    WILLIAMS            409       +407       +816    46.0%
+  DRAGONFLY-DOJI          BB          WILLIAMS            411       +799       +377    36.5%
+  BULLISH-MARUBOZU        ZONE        WILLIAMS            358       +987       +374    39.8%
+  DRAGONFLY-DOJI          BB          PCTB                282       +370       +718    40.6%
+  DARK-CLOUD-COVER        KELTNER     WILLIAMS            341       +366       +519    42.2%
+  SPINNING-TOP            ZONE        PCTB               3286       +487       +359    41.8%
+  INVERTED-HAMMER         ZONE        STOCHRSI            672       +383       +359    39.5%
+  MORNING-STAR            ZONE        ROC                 997       +533       +344    37.1%
+  HAMMER                  KELTNER     NONE               2307       +341       +767    40.4%
+  DRAGONFLY-DOJI          DONCHIAN    WILLIAMS            369     +1,284       +340    35.6%
+  PIERCING-LINE           ZONE        STOCHRSI            272     +1,307       +322    40.9%
+  HAMMER                  BB          WILLIAMS            810       +606       +319    38.7%
+    ... and 80 more
+
+  READ THIS BEFORE ACTING ON ANY ROW ABOVE.
+  277 combinations looked good on the first half. If every
+  one of them were worthless, roughly half would still look good on the
+  second half by chance — about 138 rows. This table has 120.
+  A row is only interesting if the whole table is bigger than luck
+  predicts, and even then the individual row still needs live proof.

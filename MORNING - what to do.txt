@@ -1,0 +1,86 @@
+================================================================
+   EVERY TRADING MORNING          keep this open until it sticks
+================================================================
+
+
+   BEFORE 9:15
+   -----------
+
+   1.  Double-click        ASCENDRA.py
+       (in 5 LIVE FEED)
+
+   2.  Press  1            log in to Zerodha
+
+          - your browser opens the Zerodha login
+          - log in as normal
+          - it lands on a page that FAILS TO LOAD. That is
+            CORRECT. Nothing has gone wrong.
+          - copy the WHOLE address from the address bar
+          - paste it into the black window, press Enter
+          - it shows live prices. That is the feed working.
+
+   3.  Press Enter         back to the menu
+
+   4.  Press  2            start the engine
+
+          - your dashboard opens at localhost:5055
+
+   5.  LEAVE THE BLACK WINDOW OPEN.
+
+       That window IS the engine. Close it and open calls stop
+       being watched - and a stop nobody is watching is not a
+       stop.
+
+
+   THEN NOTHING
+   ------------
+
+   The engine handles the rest:
+
+       every 150 seconds    scans the market for new setups
+       every 5 seconds      re-checks every open call
+       every 10 minutes     sweeps all 2,300 for swing setups
+       15:10                closes intraday positions
+       15:45                runs the closing swing scan
+       all day              writes everything to DATA\calls_log.csv
+
+   Look at the dashboard whenever you like: localhost:5055
+
+
+   AT THE END OF THE DAY
+   ---------------------
+
+   Close the window. Everything is already saved.
+
+
+================================================================
+   IF SOMETHING IS WRONG
+================================================================
+
+   "Today's login is missing"
+        You pressed 2 before 1. Press 1 first.
+
+   Dashboard will not load
+        The black window is closed. Start it again.
+
+   No calls appearing
+        Normal for a quiet morning. The engine is selective -
+        it only fires when a setup genuinely appears. Check the
+        WATCHING tab: that shows ideas it built and declined,
+        so you can tell "nothing happening" from "nothing
+        firing".
+
+   Anything else
+        Screenshot the black window and send it to Claude.
+        Do not try to fix it - several of the warnings that
+        appear are completely normal, and only the full text
+        says which.
+
+
+================================================================
+   THE ONE THING TO REMEMBER
+
+   Set your PC never to sleep on trading days. If it sleeps
+   mid-session the engine goes quiet without saying so, and
+   you lose the day's record.
+================================================================

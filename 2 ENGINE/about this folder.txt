@@ -1,0 +1,70 @@
+================================================================
+  2  ENGINE
+================================================================
+
+YOU DO NOT NEED TO OPEN ANYTHING IN HERE.
+
+These are Claude's working parts. They are kept in the open rather
+than hidden away so that nothing about the testing is a black box -
+if you ever want to know exactly what a rule does, it is written
+down here in plain terms.
+
+
+THE FILES
+---------
+
+inv_hs.py
+    YOUR DETECTOR, COPIED EXACTLY.
+
+    This is the pattern-spotting code from your live scanner,
+    character for character. It has deliberately NOT been tidied,
+    improved or corrected.
+
+    That is the whole point. It is the thing being tested. If it
+    were quietly improved first, the results would describe some
+    other scanner rather than yours.
+
+    Any change we decide to make later gets added as a separate,
+    clearly labelled version, so we can measure what that one
+    change did on its own.
+
+
+replay.py
+    THE TRADE RULES.
+
+    Turns a spotted pattern into a paper trade: buy at the next
+    day's open, stop at the right shoulder low, sell half at the
+    first target and move the stop up to breakeven, sell the rest
+    at the second target.
+
+    Two rules in here matter more than they look:
+
+    - If a single day touches both your stop and your target, it
+      is recorded as a LOSS. A daily bar does not tell you which
+      came first, and assuming the good one would make every
+      result look better than it really was.
+
+    - The original stop is stored separately and never overwritten,
+      even after the stop moves up to breakeven. Otherwise every
+      winning trade would quietly measure its risk against the
+      wrong number, and the mistake would be invisible.
+
+
+selftest.py
+    THE PROOF IT WORKS.
+
+    Rebuilds your STLTECH trade from scratch and checks every
+    number against your own document:
+
+        entry     Rs 700.00         stop      Rs 601.00
+        target 1  Rs 766.00         target 2  Rs 874.75
+        left-shoulder alternative target  Rs 813.75
+        stop 14.1% below entry, position 285 shares
+        breakout on 1.09x average volume
+
+    It also tests all four ways a trade can end, and the awkward
+    case of a day that touches both stop and target.
+
+    STATUS: every check passing, as of 1 September 2026.
+
+================================================================

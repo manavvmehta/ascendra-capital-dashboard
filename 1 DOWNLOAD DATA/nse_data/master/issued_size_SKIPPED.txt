@@ -1,0 +1,1 @@
+NSE quote-equity API refused all requests. Company size must be derived from price/turnover data.

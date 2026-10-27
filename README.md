@@ -1,21 +1,26 @@
 # Ascendra Capital dashboard
 
-This is a **source-code copy** of the Ascendra Capital dashboard, prepared on 27 October 2026. It is for version history and further development. The live Desktop folder was not changed.
+This repository is a snapshot of the full `ASCENDRA CAPITAL` Desktop project, prepared on 27 October 2026. It includes the dashboard code, scanner code, data files, research files, old versions, and archives. The live Desktop folder was not changed.
 
-The dashboard is a local web page served by Python. Its main entry point is `5 LIVE FEED/ASCENDRA.py`; the page is `WEBSITE/ascendra_desk.html`. The SMC, Patterns, and Commodities scanners are separate Python programs in `5 LIVE FEED`. Supporting call-engine code is in `3 CALL ENGINE`. Download and research utilities are in `1 DOWNLOAD DATA` and `2 ENGINE`.
+**Keep this repository private.** The historical data and trade records are included. The Zerodha key and daily token files are deliberately excluded. The active dashboard page's embedded live records were replaced with empty blocks; the records remain in the separate data files. Python cache files were also omitted.
 
-## Private files are deliberately absent
+Git Large File Storage (Git LFS) is used for JSON data and video files. You need Git LFS when cloning the complete project. GitHub may count this storage and downloads against your account allowance.
 
-Broker keys, daily login tokens, downloaded market data, live trade records, archives, and previous large backtests are **not in this repository**. The dashboard page's embedded live records were replaced with empty data blocks. Do not remove the rules in `.gitignore` or upload the Desktop folder directly.
+## Main files
 
-This copy cannot reproduce past performance without the separate historical data and a reviewed backtest. It is not a verified trading system and does not place real orders.
+- `5 LIVE FEED/ASCENDRA.py`: morning launcher and login menu
+- `5 LIVE FEED/desk.py`: local dashboard server on port 5055
+- `WEBSITE/ascendra_desk.html`: dashboard page
+- `5 LIVE FEED/SMC NEW.py`: current SMC scanner
+- `5 LIVE FEED/FORMATIONS LIVE.py`: pattern scanner
+- `5 LIVE FEED/COMMODITIES LIVE.py`: commodities scanner
+- `3 CALL ENGINE/tech_calls.py`: older call engine
+- `DATA/`: saved histories and trade records
+- `ARCHIVE/`: previous copies and historical data
 
-## Running a separate local copy
+## Run locally
 
-1. Install Python 3 and the packages in `requirements.txt`.
-2. Obtain your own Zerodha Kite Connect credentials. From `5 LIVE FEED`, run `python connect.py` and complete the Zerodha login. The program creates local key and token files; keep them private.
-3. Start `python ASCENDRA.py` in `5 LIVE FEED`. Use its menu to start the desk and open `http://127.0.0.1:5055`.
-4. Start `SMC NEW.bat` and `COMMODITIES LIVE.bat` in separate windows if needed. Check whether `FORMATIONS LIVE.py` was started by the desk before opening its batch file separately.
+Install Python 3 and `requirements.txt`. In `5 LIVE FEED`, run `python connect.py` and complete your own Zerodha login. That creates private key and token files locally. Then run `python ASCENDRA.py` and use its menu to start the desk. Open `http://127.0.0.1:5055`.
 
-The fresh SMC swing rules are in `5 LIVE FEED/SMC NEW.py`. Intraday research is ongoing; no new intraday rules are implied by this copy.
+The project is a research dashboard. It does not place live orders. The historical data and old versions are preserved for review; they do not prove that any strategy will be profitable.
 

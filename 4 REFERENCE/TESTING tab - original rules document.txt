@@ -1,0 +1,594 @@
+================================================================================
+INVERTED HEAD & SHOULDERS  ·  HANDOFF PACKAGE FOR BACKTESTING
+Inverted head & shoulders, daily charts, Indian equities (NSE)
+Prepared 01/09/2026
+================================================================================
+
+READ THIS FIRST, CLAUDE.
+
+You are being handed a pattern detector that already runs live, and asked to
+backtest it. The person giving you this file is a technical analyst working
+with the scanner's owner.
+
+WHAT WE WANT BACK
+    A thesis, with evidence, on which of the twelve open questions in PART 5
+    should be answered which way. We will implement your conclusions in the
+    live code. Section PART 7 says exactly what format is usable.
+
+WHAT WE DO NOT WANT
+    A rewrite. The detector below is the thing under test. If you change it,
+    change ONE rule at a time and report each change's effect separately, or
+    we cannot tell which change did what.
+
+THE SINGLE MOST IMPORTANT THING
+    This project has already been burned by underpowered statistics. A finding
+    on 40 trades is not a finding. PART 6 lists the specific traps we have
+    easy to fall into here — please read it before concluding
+    anything.
+
+
+--------------------------------------------------------------------------------
+PART 1  ·  WHAT THIS IS AND WHY IT EXISTS
+--------------------------------------------------------------------------------
+
+A live scanner runs daily charts for the inverted head-and-shoulders pattern and paper-trades
+every one it finds with Rs2,00,000 of virtual money.
+
+Nothing is executed. It is a measurement instrument. The purpose is to find out
+whether the pattern works, on his rules, before real money is involved.
+
+THE WHOLE THING WAS BUILT FROM ONE CHART.
+    STLTECH (Sterlite Technologies), NSE, daily. Pattern formed June-August
+    2026, broke out late August.
+
+        Left shoulder low     553.25   (11 June 2026)
+        Head low              492.25   (14 July 2026)
+        Right shoulder low    601.00   (21 August 2026)
+        Neckline              683.50   (horizontal)
+        Breakout close        695.85   (27 August 2026)
+        Breakout volume       1.09x the 20-day average
+
+    Every threshold in the detector was reverse-engineered so that this one
+    chart passes. That is a sample size of one. It is the main reason this
+    handoff exists.
+
+THE ORIGINAL INSTRUCTION, VERBATIM
+    "there is one pattern called inverted head and shoulder, spot that pattern
+    on any chart on daily time frame and the final candle should break the
+    resistance level with good volume... there are two targets in this pattern.
+    first target is the length of the shoulder and the second target is the
+    head. it is not necessary that the length of the shoulders should be same,
+    minor difference in the length of the shoulders is totally fine."
+
+A LATER CORRECTION, VERBATIM (01/09/2026)
+    "both the ends of the head should be almost equal or 2-5% price difference
+    is fine, the chart that you picked had a lot of price difference."
+
+    This produced NECK_TOL = 0.05 in the code below.
+
+A DELIBERATE REMOVAL, VERBATIM
+    "lets skip that volume indicater for this tab"
+
+    So volume is measured and reported but gates nothing. Note the tension:
+    the original description asked for "good volume", and the reference
+    chart broke out on only 1.09x. Question Q10 in PART 5 is about this.
+
+
+--------------------------------------------------------------------------------
+PART 2  ·  THE DETECTOR, VERBATIM AND RUNNABLE
+--------------------------------------------------------------------------------
+
+This is the exact source running in production. It is fully standalone - it
+imports only `datetime` from the standard library. Save it as inv_hs.py and it
+will run against any list of daily OHLC bars.
+
+INPUT FORMAT
+    A list of dicts, oldest first:
+        {"date": "2026-08-27", "open": 690.0, "high": 700.0,
+          "low": 685.0, "close": 695.85, "volume": 2028680}
+
+USAGE
+    import inv_hs as H
+    pattern = H.find(bars, "STLTECH")         # None if no shape
+    ok, why = H.qualifies(pattern)            # is it a FRESH breakout?
+
+`find` returns the best-scoring pattern in the window, or None. `qualifies`
+tells you whether it has broken out recently enough to act on.
+
+- - - - - - - - - - - - - - - - -  BEGIN inv_hs.py  - - - - - - - - - - - - - -
+
+#!/usr/bin/env python3
+"""
+inv_hs.py — inverted head-and-shoulders detection on daily candles.
+
+DETECTION ONLY. It finds the shape and reports it. No stop, no target, no
+position, no book. Each one is analysed by hand (owner's instruction, 31/08).
+
+THE SHAPE (his description, STLTECH example)
+    three swing lows — LOW, LOWER, LOW — with the middle one (the HEAD) the
+    deepest, and the two outer ones (the SHOULDERS) roughly level. The two
+    rallies between them peak at similar highs; the line across those peaks is
+    the NECKLINE. The pattern completes when a candle CLOSES above the neckline
+    on strong volume.
+
+    "it is not necessary that the length of the shoulder should be same, minor
+     difference in the length of the shoulders is totally fine"
+
+    So symmetry is checked loosely — see SHOULDER_TOL.
+
+TARGETS (reported as information, not traded)
+    T1  neckline + (neckline - shoulder low)
+    T2  neckline + (neckline - head low)
+    Which shoulder feeds T1 is ambiguous when they differ, so BOTH are shown
+    rather than one being silently chosen.
+
+WHY THE PIVOT RULE IS THE WHOLE GAME
+    Every parameter below is a way to find a pattern that is not there. PIVOT_K
+    especially: too small and every wiggle is a shoulder, too large and nothing
+    is ever found. It is set once, here, and applied to every stock — not tuned
+    per name, which is how a detector becomes a curve-fitter.
+"""
+from datetime import date
+
+# ── the only knobs, all in one place ───────────────────────────────────────
+PIVOT_K = 5          # a swing low is the lowest close/low within +/- K bars
+LOOKBACK = 200       # daily bars examined
+MIN_HEAD_EDGE = 0.03  # the head must be >=3% below the shallower shoulder
+SHOULDER_TOL = 0.60  # shoulders' depths may differ by up to 60% of the deeper
+NECK_TOL = 0.05      # the two peaks either side of the head — the ENDS of the
+                     # head — may differ by at most 5%. His words, 01/09:
+                     # "almost equal or 2-5% price difference is fine".
+                     # This is a hard structural condition, not a preference:
+                     # without it the neckline can be drawn far above one side
+                     # of the pattern and the shape is not an inverted H&S.
+MIN_DEPTH_PCT = 0.04  # head must sit >=4% below the neckline — no flat noise
+MAX_BARS = 160       # the whole pattern must fit in this many bars
+MIN_BARS = 20        # ...and take at least this many
+# NO VOLUME GATE (31/08). It was 1.5x the 20-day average, and it would have
+# hidden the reference example: STLTECH broke out on 2,028,680 against a
+# 1,861,817 average — 1.09x — and ran +6.3% in two sessions anyway.
+#
+# The multiple is still measured and printed on every row. It is just not
+# allowed to decide what he sees, because he is judging these by hand and a
+# threshold I invented should not be filtering his candidates.
+FRESH_BARS = 3       # the breakout close must be within this many bars of now
+
+
+def pivots(bars, k=PIVOT_K):
+    """(lows, highs) as lists of (index, price).
+
+    A pivot low is strictly the lowest LOW in the window either side. Ties are
+    rejected on purpose: a flat base produces dozens of equal lows and every
+    one of them would become a candidate shoulder.
+    """
+    lo, hi = [], []
+    for i in range(k, len(bars) - k):
+        w = bars[i - k:i + k + 1]
+        if bars[i]["low"] < min(b["low"] for b in w if b is not bars[i]):
+            lo.append((i, bars[i]["low"]))
+        if bars[i]["high"] > max(b["high"] for b in w if b is not bars[i]):
+            hi.append((i, bars[i]["high"]))
+    return lo, hi
+
+
+def find(bars, symbol=""):
+    """Return the best inverted H&S in `bars`, or None.
+
+    `bars` is oldest-first, each {date, open, high, low, close, volume}.
+    """
+    if len(bars) < MIN_BARS + 2 * PIVOT_K:
+        return None
+    lows, highs = pivots(bars)
+    if len(lows) < 3 or len(highs) < 2:
+        return None
+
+    best = None
+    for a in range(len(lows) - 2):
+        for b in range(a + 1, len(lows) - 1):
+            for c in range(b + 1, len(lows)):
+                iL, pL = lows[a]          # left shoulder
+                iH, pH = lows[b]          # head
+                iR, pR = lows[c]          # right shoulder
+                span = iR - iL
+                if not (MIN_BARS <= span <= MAX_BARS):
+                    continue
+                # The head must be the deepest, and clearly so. ONE check, not
+                # two: `pH >= pL or pH >= pR` was here as well and is entirely
+                # subsumed — if pH >= min(pL,pR) then pH > min(pL,pR)*(1-edge)
+                # follows automatically. It was dead code, and no mutation of it
+                # could ever be caught, which is how it was found.
+                if pH > min(pL, pR) * (1 - MIN_HEAD_EDGE):
+                    continue
+                # the two peaks BETWEEN the lows form the neckline
+                h1 = [p for (i, p) in highs if iL < i < iH]
+                h2 = [p for (i, p) in highs if iH < i < iR]
+                if not h1 or not h2:
+                    continue
+                # Horizontal neckline at the HIGHER peak. That is how it was drawn
+                # it on STLTECH, and it is the conservative choice: a close above
+                # the higher peak is unambiguous, a sloping line is not.
+                # THE TWO ENDS OF THE HEAD MUST BE LEVEL.
+                #
+                # Owner, 01/09: "both the ends of the head should be almost
+                # equal or 2-5% price difference is fine, the chart that you
+                # picked had a lot of price difference."
+                #
+                # Until now the neckline was simply the HIGHER of the two
+                # peaks, with nothing requiring them to be near each other. A
+                # left peak at 650 against a right peak at 500 passed happily,
+                # and the neckline was drawn 30% above one side of the head.
+                # That is not the pattern — on his STLTECH reference the two
+                # peaks sit almost exactly level and the neckline is flat.
+                p1, p2 = max(h1), max(h2)
+                if p1 <= 0 or p2 <= 0:
+                    continue
+                neck_gap = abs(p1 - p2) / max(p1, p2)
+                if neck_gap > NECK_TOL:
+                    continue
+                neck = max(p1, p2)
+                if neck <= 0:
+                    continue
+                # depth below the neckline
+                dL, dR, dH = neck - pL, neck - pR, neck - pH
+                if dH / neck < MIN_DEPTH_PCT:
+                    continue
+                if dL <= 0 or dR <= 0:
+                    continue
+                # shoulders roughly level — loosely, as he asked
+                if abs(dL - dR) / max(dL, dR) > SHOULDER_TOL:
+                    continue
+                # score: prefer deep, symmetric, recent
+                sym = 1 - abs(dL - dR) / max(dL, dR)
+                score = (dH / neck) * 100 * sym + iR * 0.01
+                if best is None or score > best["score"]:
+                    best = {"score": score, "symbol": symbol,
+                            "i_left": iL, "i_head": iH, "i_right": iR,
+                            "left": pL, "head": pH, "right": pR, "neck": neck,
+                            "d_left": dL, "d_right": dR, "d_head": dH,
+                            # kept so the flatness of the neckline is visible
+                            # rather than merely enforced
+                            "neck_left": round(p1, 2), "neck_right": round(p2, 2),
+                            "neck_gap_pct": round(neck_gap * 100, 2),
+                            "sym_pct": round(sym * 100, 1),
+                            "bars": span}
+    if best is None:
+        return None
+
+    # ── has it broken out? ──
+    tail = bars[best["i_right"]:]
+    neck = best["neck"]
+    brk = None
+    for j, bar in enumerate(tail):
+        if bar["close"] > neck:
+            idx = best["i_right"] + j
+            v20 = [x["volume"] for x in bars[max(0, idx - 20):idx] if x.get("volume")]
+            avg = (sum(v20) / len(v20)) if v20 else 0
+            brk = {"i": idx, "date": str(bar["date"])[:10], "close": bar["close"],
+                   "volume": bar.get("volume") or 0, "vol_avg20": round(avg),
+                   "vol_x": round((bar.get("volume") or 0) / avg, 2) if avg else None,
+                   "bars_ago": len(bars) - 1 - idx}
+            break
+
+    best.update({
+        "date_left": str(bars[best["i_left"]]["date"])[:10],
+        "date_head": str(bars[best["i_head"]]["date"])[:10],
+        "date_right": str(bars[best["i_right"]]["date"])[:10],
+        "last_close": bars[-1]["close"],
+        "breakout": brk,
+        # reported, never traded — and BOTH shoulders, because which one feeds
+        # T1 is genuinely ambiguous when they differ
+        "t1_right": round(neck + best["d_right"], 2),
+        "t1_left": round(neck + best["d_left"], 2),
+        "t2_head": round(neck + best["d_head"], 2),
+    })
+    return best
+
+
+def qualifies(p, fresh=FRESH_BARS):
+    """A fresh close above the neckline. That is the whole test.
+
+    Volume is measured and reported but does NOT gate — see the note above.
+    """
+    b = p.get("breakout")
+    if not b:
+        return False, "no close above the neckline yet"
+    if b["bars_ago"] > fresh:
+        return False, f"broke out {b['bars_ago']} bars ago — not fresh"
+    v = f" on {b['vol_x']}x volume" if b.get("vol_x") else ""
+    return True, f"closed above {p['neck']:.2f}{v}"
+
+
+- - - - - - - - - - - - - - - - -  END inv_hs.py  - - - - - - - - - - - - - - -
+
+
+--------------------------------------------------------------------------------
+PART 3  ·  THE PAPER-TRADE RULES
+--------------------------------------------------------------------------------
+
+The detector finds shapes. These rules turn a shape into a trade. They live in
+a separate module which is NOT included here because it carries application
+plumbing, but the logic is complete below - reimplement it exactly.
+
+LEVELS  (computed from the pattern alone, independent of the entry price)
+
+    neck   = the pattern's neckline
+    stop   = the RIGHT shoulder low
+    T1     = neck + (neck - right shoulder low)
+    T2     = neck + (neck - head low)
+
+    Also recorded but NOT traded:
+    t1_left_alt = neck + (neck - left shoulder low)
+
+    On STLTECH:  stop 601.00 · T1 766.00 · T2 874.75 · (left alt T1 813.75)
+
+ENTRY
+    The NEXT day's OPEN after the breakout close.
+    NOT the breakout close itself - that price was not available to act on,
+    because the signal only exists once the daily candle has closed.
+
+    If that open is at or below the stop, the trade is SKIPPED entirely. The
+    pattern was invalidated overnight and there is no position to take.
+
+SIZE
+    floor(Rs2,00,000 / entry price) whole shares.
+
+MANAGEMENT, one daily bar at a time:
+
+    1. If low <= stop:
+           if half was already booked at T1:
+               exit the remainder at the stop (which is now the entry price)
+               R = (T1 - entry) / risk / 2
+           else:
+               exit at the stop, R = -1.0
+    2. Else if high >= T2:
+           exit fully.
+           R = ((T1 - entry)/risk + (T2 - entry)/risk) / 2
+    3. Else if high >= T1 and half not yet booked:
+           book HALF, move the stop UP to the ENTRY price, keep running.
+
+    where risk = entry - original stop (the right shoulder low)
+
+CRITICAL ORDERING RULE
+    Within a single daily bar, the ADVERSE side is assumed to happen first.
+    A bar whose low touches the stop AND whose high touches T2 is recorded as
+    a STOP, R = -1.0.
+
+    Daily bars do not tell you whether the high or the low came first.
+    Assuming the favourable one would flatter every result. Do not change this.
+
+WHAT THIS MEANS FOR THE ARITHMETIC
+    On the STLTECH reference, entry 700.00 against a 601.00 stop is a 14.1%
+    stop. The R multiple is small relative to the capital at risk, and one
+    loser costs what several partial winners make. Question Q9 is about this.
+
+
+--------------------------------------------------------------------------------
+PART 4  ·  THE UNIVERSE THE LIVE SCANNER USES
+--------------------------------------------------------------------------------
+
+    All NSE equities in the EQ and BE series
+    MINUS the top 100 companies by market capitalisation
+    (SEBI: 1-100 large, 101-250 mid, 251+ small - so midcap and smallcap only)
+    EXCLUDING the SME platform (SM/ST series) and BZ surveillance counters
+    Roughly 1,500 stocks. Scanned once daily after the close.
+
+    BE is trade-to-trade: compulsory delivery, no intraday, no shorting.
+    It is included because STLTECH trades there.
+
+FOR YOUR BACKTEST
+    Match this if you can. If your data source cannot distinguish series or
+    market cap, say which universe you actually used - results are not
+    comparable across different universes, and a large-cap-heavy sample will
+    behave differently from a smallcap one.
+
+    Free sources that work for NSE daily data: yfinance (append ".NS" to the
+    symbol, e.g. "STLTECH.NS"), or nsepy. Both have gaps and neither is
+    survivorship-bias-free - see PART 6.
+
+
+--------------------------------------------------------------------------------
+PART 5  ·  THE TWELVE OPEN QUESTIONS
+--------------------------------------------------------------------------------
+
+Each of these is currently a GUESS in the code. Something had to be chosen, so
+something was. These are what we want your evidence on.
+
+Q1.  WHICH SHOULDER FEEDS TARGET 1?
+     The instruction said "first target is the length of the shoulder", but there are two
+     shoulders of different lengths.
+     NOW: the RIGHT shoulder (the one the stop sits under).
+     On STLTECH: right gives T1 766.00, left would give 813.75.
+     TEST: right vs left vs shallower vs average. Which maximises expectancy,
+     and which maximises hit rate? They may not be the same answer.
+
+Q2.  MUST THE NECKLINE BE HORIZONTAL?
+     NOW: yes, always, drawn at the HIGHER of the two peaks.
+     TEST: does allowing a sloping neckline (fitted through both peaks) find
+     more real patterns, or just more noise? If sloping is allowed, what
+     defines the break - a close above the projected line?
+
+Q3.  HOW UNEQUAL MAY THE SHOULDERS BE?
+     NOW: their DEPTHS below the neckline may differ by up to
+     SHOULDER_TOL = 0.6 (60%).
+     On STLTECH the left is 130.25 deep, the right 82.50 - a 37% difference.
+     TEST: sweep this from 0.2 to 0.9. Does tightening it improve results, or
+     just cut the sample? Is depth the right measure, or price level, or time?
+
+Q4.  SYMMETRY IN TIME
+     NOW: not checked at all. Only the total span is bounded
+     (20-160 bars). A 10-bar left shoulder with a 90-bar
+     right shoulder passes.
+     TEST: add a time-symmetry constraint and see whether it helps.
+
+Q5.  MUST THE HEAD BE THE LOWEST LOW IN THE WINDOW?
+     NOW: no. The head only has to be lower than both shoulders, so a pattern
+     can form partway through a longer decline with lower lows behind it.
+     TEST: require the head to be the lowest low in the last N bars. Also:
+     does the pattern need a prior DOWNTREND to be meaningful? Classical
+     theory says it is a reversal pattern, which implies something to reverse.
+
+Q6.  HOW FRESH MUST THE BREAKOUT BE?
+     NOW: within FRESH_BARS = 3 daily bars.
+     TEST: 1, 2, 3, 5, 10. How fast does the edge decay after the break?
+
+Q7.  WHAT INVALIDATES A FORMING PATTERN?
+     NOW: nothing. A shape sits in the "forming" list until it breaks out or
+     falls out of the 200-bar window.
+     TEST: does a close below the head, or below the right shoulder, kill the
+     pattern? Should it expire after N bars without a break?
+
+Q8.  RETEST OF THE NECKLINE
+     NOW: ignored. Entry is the next open after the breakout close.
+     TEST: compare (a) enter next open, vs (b) wait for a pullback to the
+     neckline and enter there, vs (c) wait N bars for a retest then abandon.
+     Report both expectancy AND how many signals each variant misses entirely,
+     because a better entry that never fills is not better.
+
+Q9.  THE STOP
+     NOW: the right shoulder low. On STLTECH that is 14.1% below the entry.
+     TEST: shoulder low vs just below the neckline vs a fixed percentage vs an
+     ATR multiple. This is the single biggest lever on the results - report
+     expectancy, win rate and max drawdown for each.
+
+Q10. VOLUME - SHOULD IT COME BACK?
+     NOW: measured, never enforced. Removed on instruction, but the
+     original description said "good volume" and the reference chart broke out
+     on only 1.09x.
+     TEST: gate at 1.0x, 1.2x, 1.5x, 2.0x of the 20-day average. Report the
+     trade count at each - a filter that improves win rate while removing 80%
+     of signals may not be worth having.
+
+Q11. THE PIVOT SIZE
+     NOW: PIVOT_K = 5. A swing low is the lowest low within
+     5 bars either side. This single number decides what counts as a
+     shoulder at all.
+     TEST: 3, 5, 7, 10. Expect this to change the sample size enormously.
+
+Q12. ANYTHING WE ARE NOT LOOKING AT
+     NOW: only price and volume from daily candles.
+     TEST/SUGGEST: index trend at the time of the break, sector behaviour,
+     position relative to a long moving average, the stock's own trend before
+     the pattern, seasonality. If a condition you would always check by eye is
+     missing, name it.
+
+
+--------------------------------------------------------------------------------
+PART 6  ·  TRAPS THIS PROJECT HAS ALREADY FALLEN INTO
+--------------------------------------------------------------------------------
+
+Please read these. Each is easy to fall into and each will change your
+conclusions rather than merely add noise.
+
+6.1  UNDERPOWERED CONCLUSIONS
+     The most common way a backtest of this kind goes wrong. A difference in
+     average R between two variants will look real long before it is, and a
+     bucket of 20 or 30 trades moves 0.3R when one trade changes.
+     RULE: refuse to conclude on any group with n < 30. State the sample size
+     beside every claim, and give a confidence interval rather than a point
+     estimate. If the interval straddles zero, say so plainly.
+
+6.2  THE COMPARISON THAT IS SECRETLY A DIFFERENT VARIABLE
+     If you split trades into groups and the groups also differ in some other
+     way - sector, price level, year, market regime, which sub-shape of the
+     pattern they are - then you are not measuring what you think.
+     RULE: before comparing two groups, list what else differs between them.
+
+6.3  LOOK-AHEAD THROUGH A MUTATED FIELD
+     These rules MOVE the stop to breakeven after T1. If your backtest stores
+     one "stop" field and compares later prices against it, then for every
+     trade that reached T1 you are comparing against the wrong level, and the
+     error is invisible.
+     RULE: keep the ORIGINAL stop separately. risk = entry - original stop,
+     always. Reconstruct levels from the entry state, never from the final
+     record.
+
+6.4  BUILD IN A CROSS-CHECK BEFORE YOU TRUST THE SWEEP
+     Reproduce the STLTECH trade in PART 1 and PART 3 by hand first: entry
+     700.00, stop 601.00, T1 766.00, T2 874.75. If your replay does not
+     produce those exact levels from the pattern, stop and find out why before
+     running the whole universe. A single number that disagrees is worth more
+     than a thousand rows that agree with each other.
+
+6.5  SURVIVORSHIP AND DELISTING
+     A universe built from TODAY's listed stocks and tested over past years
+     silently excludes everything that delisted, merged or was suspended. On
+     Indian smallcaps this is a large effect and it always flatters results.
+     RULE: say plainly whether your universe is survivorship-biased. If it is,
+     treat the result as an upper bound rather than an estimate.
+
+6.6  CORPORATE ACTIONS
+     Splits and bonuses on NSE smallcaps are frequent. Unadjusted data will
+     manufacture enormous fake patterns - a 1:10 split looks like a 90% crash
+     and will generate a textbook head.
+     RULE: confirm your data is adjusted. Then eyeball the largest patterns
+     your scan finds: if the head is a 90% drop, it is a split, not a pattern.
+
+6.7  THE PRICE YOU COULD NOT HAVE HAD
+     Entry must be the next day's OPEN. Using the breakout close books a price
+     that only existed after the decision point.
+     RULE: every price your backtest uses must have been observable at the
+     moment the decision was made. Check each one against that test.
+
+--------------------------------------------------------------------------------
+PART 7  ·  WHAT TO SEND BACK
+--------------------------------------------------------------------------------
+
+Please return a single document with these sections. This format is what lets
+us implement your conclusions directly rather than re-deriving them.
+
+  A. YOUR SETUP
+     Data source, date range, universe, number of symbols, whether adjusted,
+     whether survivorship-biased. Number of patterns found and number of
+     completed trades. Without this we cannot weigh anything below it.
+
+  B. THE BASELINE
+     Run the detector EXACTLY as given, with the rules in PART 3 unchanged.
+     Report: trades, win rate, average R, expectancy per trade, the R
+     distribution, max drawdown, and average holding period in bars.
+     This is the number every change gets measured against.
+
+  C. ONE CHANGE AT A TIME
+     For each of Q1-Q12 you tested, a short block:
+         the question
+         what you changed
+         trades / win rate / average R / expectancy, vs the baseline
+         your confidence: is this real, or inside the noise?
+     One variable per block. Combined changes are not interpretable.
+
+  D. YOUR RECOMMENDATION
+     Which changes should go into the live code, in priority order. For each,
+     the specific value (e.g. "PIVOT_K = 7", "stop = neckline - 0.5 x ATR14").
+     We will implement these literally, so be precise.
+
+  E. WHAT YOU COULD NOT TEST
+     Anything you wanted to check and could not - missing data, ambiguity in
+     these rules, questions this file does not answer. This is as useful as
+     the results.
+
+  F. CHARTS
+     If possible: five patterns the detector ACCEPTED that you would have
+     REJECTED by eye, and five it MISSED that you would have TAKEN. These are
+     worth more than any statistic, because they show where the rules and an
+     analyst's judgement diverge.
+
+
+--------------------------------------------------------------------------------
+PART 8  ·  CURRENT PARAMETER VALUES, FOR REFERENCE
+--------------------------------------------------------------------------------
+
+    PIVOT_K            5         swing low = lowest within +/- K bars
+    LOOKBACK           200       daily bars examined
+    MIN_HEAD_EDGE      0.03      head this far below the shallower shoulder
+    NECK_TOL           0.05      max gap between the two neckline peaks
+    MIN_DEPTH_PCT      0.04      head this far below the neckline
+    SHOULDER_TOL       0.6       max difference in shoulder DEPTHS
+    MIN_BARS           20        shortest allowed pattern
+    MAX_BARS           160       longest allowed pattern
+    FRESH_BARS         3         breakout must be this recent to act on
+    CAPITAL_PER_TRADE  200000    rupees per paper position
+
+================================================================================
+Questions about this file: send them back to the sender. Do not guess at a rule that
+is not stated here - if something is ambiguous, that ambiguity is itself a
+finding we want to know about.
+================================================================================
