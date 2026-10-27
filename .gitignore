@@ -1,0 +1,30 @@
+# Private broker credentials and session tokens
+**/kite_keys.txt
+**/kite_token.json
+**/*secret*
+**/.env
+**/.env.*
+
+# Live trading state and downloaded market data
+DATA/
+ARCHIVE/
+NSE FO BACKTEST/
+FUTURE BACKTEST/
+RESEARCH/
+**/*.csv
+**/*.json
+**/*.parquet
+**/*.feather
+**/*.xlsx
+**/*.xls
+**/*.zip
+**/*.db
+**/*.sqlite*
+
+# Python and local tooling
+**/__pycache__/
+**/*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
