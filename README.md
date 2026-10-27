@@ -2,7 +2,7 @@
 
 This repository is a snapshot of the full `ASCENDRA CAPITAL` Desktop project, updated on 28 October 2026. It includes the dashboard code, scanner code, data files, research files, old versions, and archives. The live Desktop folder was not changed.
 
-**Keep this repository private.** The historical data and trade records are included. The Zerodha key and daily token files are deliberately excluded. The active dashboard page's embedded live records were replaced with empty blocks; the records remain in the separate data files. Python cache files were also omitted.
+This public repository includes historical data and virtual trade records. The Zerodha key and daily token files are deliberately excluded. The active dashboard page's embedded live records were replaced with empty blocks; the records remain in the separate data files. Python cache files were also omitted.
 
 Git Large File Storage (Git LFS) is used for JSON data and video files. You need Git LFS when cloning the complete project. GitHub may count this storage and downloads against your account allowance.
 
