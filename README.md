@@ -1,6 +1,6 @@
 # Ascendra Capital dashboard
 
-This repository is a snapshot of the full `ASCENDRA CAPITAL` Desktop project, prepared on 27 October 2026. It includes the dashboard code, scanner code, data files, research files, old versions, and archives. The live Desktop folder was not changed.
+This repository is a snapshot of the full `ASCENDRA CAPITAL` Desktop project, updated on 28 October 2026. It includes the dashboard code, scanner code, data files, research files, old versions, and archives. The live Desktop folder was not changed.
 
 **Keep this repository private.** The historical data and trade records are included. The Zerodha key and daily token files are deliberately excluded. The active dashboard page's embedded live records were replaced with empty blocks; the records remain in the separate data files. Python cache files were also omitted.
 
@@ -23,4 +23,5 @@ Git Large File Storage (Git LFS) is used for JSON data and video files. You need
 Install Python 3 and `requirements.txt`. In `5 LIVE FEED`, run `python connect.py` and complete your own Zerodha login. That creates private key and token files locally. Then run `python ASCENDRA.py` and use its menu to start the desk. Open `http://127.0.0.1:5055`.
 
 The project is a research dashboard. It does not place live orders. The historical data and old versions are preserved for review; they do not prove that any strategy will be profitable.
+
 
